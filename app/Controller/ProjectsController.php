@@ -122,17 +122,17 @@ class ProjectsController extends AppController
         $this->set('idProjeto',$id);
 
         $qntArquivo = $this->Archive->find('count', array(
-            'conditions' => array('Project.user_id' => $idUsuario)
+            'conditions' => array('Archive.project_id' => $id)
         ));
         $this->set('qntArquivo', $qntArquivo);
 
         $qntVideo = $this->Movie->find('count', array(
-            'conditions' => array('Project.user_id' => $idUsuario)
+            'conditions' => array('Movie.project_id' => $id)
         ));
         $this->set('qntVideo', $qntVideo);
 
         $qntImage = $this->ProjectImage->find('count', array(
-            'conditions' => array('Project.user_id' => $idUsuario)
+            'conditions' => array('ProjectImage.project_id' => $id)
         ));
         $this->set('qntImage', $qntImage);
 
@@ -172,7 +172,7 @@ class ProjectsController extends AppController
                 $data['Project']['Titulo'] = $this->request->data['Project']['Titulo'];
                 $data['Project']['theme_id'] = $this->request->data['Project']['theme_id'];
                 $data['Project']['Descricao'] = $this->request->data['Project']['Descricao'];
-                $data['Project']['Aceito'] = 'N';
+                $data['Project']['Aceito'] = $this->request->data['Project']['Aceito'];
                 if ($this->Project->save($data)) {
                     $this->Session->setFlash(__('seu projeto foi salvo com sucesso!'));
                     $this->redirect(array('controller' => 'Projects', 'action' => 'index'));

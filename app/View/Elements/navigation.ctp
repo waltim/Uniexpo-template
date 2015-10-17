@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Uniexpo | Páginas de usuário</title>
+    <title>Uniexpo | Painel administrativo</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="<?= $admLocal ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -23,6 +23,9 @@
     <?php if ($this->params['controller'] === 'Resumes' && $this->params['action'] === 'index'): ?>
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
+    <?php if ($this->params['controller'] === 'SkillUsers' && $this->params['action'] === 'index'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
     <?php if ($this->params['controller'] === 'Resumes' && $this->params['action'] === 'add'): ?>
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
@@ -34,6 +37,28 @@
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
 
+    <?php if ($this->params['controller'] === 'Skills' && $this->params['action'] === 'index' || $this->params['controller'] === 'Skills' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Skills' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Socials' && $this->params['action'] === 'index' || $this->params['controller'] === 'Socials' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Socials' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Archives' && $this->params['action'] === 'index' || $this->params['controller'] === 'Archives' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Archives' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'add' || $this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Movies' && $this->params['action'] === 'add' || $this->params['controller'] === 'Movies' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

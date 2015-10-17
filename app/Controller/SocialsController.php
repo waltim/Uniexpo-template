@@ -4,12 +4,25 @@ App::uses('AppController', 'Controller');
 class SocialsController extends AppController
 {
 
+    public $uses = array('User','UserImage','Social');
 
     public $components = array('Paginator');
 
 
     public function index()
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         $this->Social->recursive = 2;
         $eventos = $this->Social->find('all', array(
             'conditions' => array('User.id' => $this->Session->read('Auth.User.id')
@@ -18,13 +31,25 @@ class SocialsController extends AppController
         $qntSociais = $this->Social->find('count', array(
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
-        $this->set('qtd',$qntSociais);
+        $this->set('qtdSocial',$qntSociais);
         $this->set('novidadeImages', $eventos, $this->paginate());
     }
 
 
     public function add()
     {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         $qntSociais = $this->Social->find('count', array(
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
@@ -51,6 +76,18 @@ class SocialsController extends AppController
 
     public function edit($id = null)
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         $this->Social->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Social->save($this->request->data)) {

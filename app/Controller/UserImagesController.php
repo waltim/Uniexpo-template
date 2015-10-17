@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 class UserImagesController extends AppController
 {
 
+    public $uses = array('User','UserImage');
 
     public $components = array('Paginator');
 
@@ -41,6 +42,18 @@ class UserImagesController extends AppController
 
     public function add()
     {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         $qntResume = $this->UserImage->find('count', array(
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
@@ -67,6 +80,18 @@ class UserImagesController extends AppController
 
     public function edit($id = null)
     {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         $this->UserImage->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->UserImage->save($this->request->data)) {

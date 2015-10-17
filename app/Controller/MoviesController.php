@@ -8,11 +8,13 @@ App::uses('AppController', 'Controller');
  */
 class MoviesController extends AppController {
 
-/**
- * Components
- *
- * @var array
- */
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->loadModel('User');
+        $this->loadModel('UserImage');
+        $this->loadModel('Movie');
+    }
 	public $components = array('Paginator');
 
     public function aprovar($id = null,$idProjeto = null, $idUsuario = null){
@@ -46,6 +48,18 @@ class MoviesController extends AppController {
     }
 
 	public function index() {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         $this->Movie->recursive = 0;
         $projetoImages = $this->Movie->find('all');
 
@@ -55,6 +69,19 @@ class MoviesController extends AppController {
 
 
     public function add($idProjeto = null, $idUsuario = null) {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         if ($this->request->is('post')) {
             $qntImagens = $this->Movie->find('count', array(
                 'conditions' => array('project_id' =>$idProjeto)
@@ -80,12 +107,25 @@ class MoviesController extends AppController {
     }
 
 
-	public function edit($id = null,$idProjeto= null) {
+	public function edit($id = null,$idProjeto= null, $idUsuario = null) {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         $this->Movie->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Movie->save($this->request->data)) {
 				$this->Session->setFlash(__('O vídeo do projeto foi salvo com sucesso!'));
-                $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto));
+                $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
 			} else {
 				$this->Session->setFlash(__('O vídeo não pode ser salvo, por favor tente novamente.'));
 			}

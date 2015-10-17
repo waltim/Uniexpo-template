@@ -4,13 +4,14 @@ App::uses('AppController', 'Controller');
 class ArchivesController extends AppController
 {
 
-
     public $components = array('Paginator');
 
     public function beforeFilter()
     {
         parent::beforeFilter();
         $this->loadModel('User');
+        $this->loadModel('UserImage');
+        $this->loadModel('Archive');
     }
 
     public function aprovar($id = null,$idProjeto = null, $idUsuario = null){
@@ -46,6 +47,18 @@ class ArchivesController extends AppController
 
     public function index()
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Archive->recursive = 2;
             $eventos = $this->Archive->find('all', array(
@@ -55,7 +68,7 @@ class ArchivesController extends AppController
             $qntCurriculo = $this->Archive->find('count', array(
                 'conditions' => array('Project.user_id' => $this->Session->read('Auth.User.id'))
             ));
-            $this->set('qtd', $qntCurriculo);
+            $this->set('qtdCurri', $qntCurriculo);
         }
         else{
             $this->Session->setFlash('Você não tem autorização.');
@@ -66,6 +79,20 @@ class ArchivesController extends AppController
 
 
     public function add($idProjeto = null,$idUsuario = null) {
+
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
+
         if ($this->request->is('post')) {
             $qntImagens = $this->Archive->find('count', array(
                 'conditions' => array('project_id' =>$idProjeto)
@@ -91,12 +118,24 @@ class ArchivesController extends AppController
     }
 
 
-    public function edit($id = null,$idProjeto= null) {
+    public function edit($id = null,$idProjeto= null,$idUsuario = null) {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         $this->Archive->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Archive->save($this->request->data)) {
                 $this->Session->setFlash(__('o arquivo do projeto foi salvo com sucesso!'));
-                $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto));
+                $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
             } else {
                 $this->Session->setFlash(__('o arquivo não pode ser salva, por favor tente novamente.'));
             }

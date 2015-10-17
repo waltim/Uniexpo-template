@@ -12,11 +12,22 @@ App::uses('AppController', 'Controller');
 class SkillsController extends AppController
 {
 
+    public $uses = array('User','UserImage','Skill');
 
     public $components = array('Paginator');
 
     public function index()
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
 
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Skill->recursive = 1;
@@ -33,6 +44,16 @@ class SkillsController extends AppController
 
     public function add($idCurso = null)
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if ($this->request->is('post')) {
                 $this->Skill->create();
@@ -52,6 +73,17 @@ class SkillsController extends AppController
 
     public function edit($id = null)
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Skill->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {

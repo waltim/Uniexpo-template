@@ -25,7 +25,9 @@
 </style>
 <div class="content-wrapper">
     <section class="content-header">
-     <h1> <li class="list-group-item"><a href="<?=$admLocal?>Users/edit/<?php echo $tipo['User']['id'] ?>">Atualizar informações</a></li></h1>
+        <h1> <li class="list-group-item"><a href="<?=$admLocal?>Users/edit/<?php echo $tipo['User']['id'] ?>">Atualizar informações</a></li></h1>
+    </section>
+    <section class="content">
         <div class="RedesSociais">
             <h1>Redes sociais</h1><br><br><br>
             <?php
@@ -78,17 +80,17 @@
                 $img = $admLocal . $tipo['UserImage']['dir'] . "/" . $tipo['UserImage']['filename'];
                 ?>
                 <br>
-                <img src="<?= $img ?>" style="width: 250px;" \>
+                <img src="<?= $img ?>" style="width: 135px;" \>
             <?php endif; ?>
             <?php if ($qtd == 0) : ?>
                 <?php if ($this->Session->read('Auth.User.Sexo') == 'Masculino') : ?>
                     <br>
-                    <img src="<?= $admLocal ?>img/masculino.jpg" style="width: 230px">
+                    <img src="<?= $admLocal ?>img/masculino.jpg" style="width: 135px;">
                 <?php endif; ?>
 
                 <?php if ($this->Session->read('Auth.User.Sexo') == 'Feminino') : ?>
                     <br>
-                    <img src="<?= $admLocal ?>img/feminino.jpg" style="width: 230px">
+                    <img src="<?= $admLocal ?>img/feminino.jpg" style="width: 135px;">
                 <?php endif; ?>
             <?php endif; ?>
         </div>
@@ -192,5 +194,6 @@
                         <?php } ?>
                     </ul>
                 </div>
+
     </section>
 </div>
