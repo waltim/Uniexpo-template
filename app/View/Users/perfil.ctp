@@ -25,9 +25,12 @@
 </style>
 <div class="content-wrapper">
     <section class="content-header">
-        <h1> <li class="list-group-item"><a href="<?=$admLocal?>Users/edit/<?php echo $tipo['User']['id'] ?>">Atualizar informações</a></li></h1>
+        <h1>
+            <li class="list-group-item"><a href="<?=$admLocal?>Users/edit/<?php echo $tipo['User']['id'] ?>">Atualizar informações</a></li>
+        </h1>
     </section>
     <section class="content">
+        <div class="row">
         <div class="RedesSociais">
             <h1>Redes sociais</h1><br><br><br>
             <?php
@@ -194,6 +197,6 @@
                         <?php } ?>
                     </ul>
                 </div>
-
+        </div>
     </section>
 </div>
