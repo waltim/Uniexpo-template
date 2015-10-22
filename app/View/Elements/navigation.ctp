@@ -52,6 +52,36 @@
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
 
+    <?php if ($this->params['controller'] === 'Usertypes' && $this->params['action'] === 'index' || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Semesters' && $this->params['action'] === 'index' || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Courses' && $this->params['action'] === 'index' || $this->params['controller'] === 'Courses' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Courses' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Shifts' && $this->params['action'] === 'index' || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'index' || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Themes' && $this->params['action'] === 'index' || $this->params['controller'] === 'Themes' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Themes' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
     <?php if ($this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'add' || $this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'edit'): ?>
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
@@ -136,7 +166,7 @@
                         <i class="fa fa-dashboard"></i> <span>Perfil</span> </i>
                     </a>
                 </li>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 3) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 3 || $this->Session->read('Auth.User.user_type_id') == 1) : ?>
                 <li class="treeview">
                     <a>
                         <i class="fa fa-files-o"></i>

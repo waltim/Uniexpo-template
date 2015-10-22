@@ -14,8 +14,28 @@ class SocialTypesController extends AppController{
 
     public $components = array('Paginator');
 
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->loadModel('User');
+        $this->loadModel('UserImage');
+        $this->loadModel('social_types');
+    }
+
     public function index()
     {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->SocialType->recursive = 2;
             $this->set('tipos', $this->paginate());
@@ -26,6 +46,18 @@ class SocialTypesController extends AppController{
         }
     }
     public function add(){
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->SocialType->save($this->data))
@@ -42,6 +74,18 @@ class SocialTypesController extends AppController{
 
     public function edit($id = null)
     {
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->SocialType->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -67,7 +111,7 @@ class SocialTypesController extends AppController{
             if($id){
                 if($this->SocialType->delete($id))
                     $this->Session->setFlash('Deletado com sucesso!');
-                $this->redirect(array('controller' => 'Socials','action' => 'index'));
+                $this->redirect(array('controller' => 'SocialTypes','action' => 'index'));
             }
             $this->Session->setFlash(__('O tipo de social não pode ser apagado.'), 'flash/error');
             $this->redirect(array('action' => 'index'));

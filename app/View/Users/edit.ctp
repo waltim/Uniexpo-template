@@ -8,7 +8,7 @@
         <?php echo $this->Form->create('User', array('inputDefaults' => array('label' => false), 'role' => 'form')); ?>
         <fieldset>
             <div class="form-group">
-                <?php echo $this->Form->input('id', array('class' => 'form-control')); ?>
+                <?php echo $this->Form->input('id', array('class' => 'form-control', 'type'=> 'hidden')); ?>
             </div>
             <!-- .form-group -->
 

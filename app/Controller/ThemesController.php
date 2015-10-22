@@ -13,9 +13,26 @@ class ThemesController extends AppController{
 
 
     public $components = array('Paginator');
-
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->loadModel('User');
+        $this->loadModel('UserImage');
+        $this->loadModel('Theme');
+    }
     public function index()
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Theme->recursive = 0;
             $this->set('tipos', $this->paginate());
@@ -26,6 +43,18 @@ class ThemesController extends AppController{
         }
     }
     public function add(){
+
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->Theme->save($this->data))
@@ -42,6 +71,17 @@ class ThemesController extends AppController{
 
     public function edit($id = null)
     {
+        $id2 = $this->Session->read('Auth.User.id');
+        $this->User->recursive = 2;
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id2));
+        $this->set('tipo', $this->User->find('first', $options));
+        $this->set('idUsuario', $id2);
+
+        $qntFoto = $this->UserImage->find('count', array(
+            'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+        ));
+        $this->set('qtd', $qntFoto);
+
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Theme->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {

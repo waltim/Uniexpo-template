@@ -44,6 +44,36 @@
     <?php echo $this->Element('navigation'); ?>
 <?php endif; ?>
 
+<?php if ($this->params['controller'] === 'Shifts' && $this->params['action'] === 'add' || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Courses' && $this->params['action'] === 'add' || $this->params['controller'] === 'Courses' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Courses' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Semesters' && $this->params['action'] === 'add' || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Usertypes' && $this->params['action'] === 'add' || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'add' || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Themes' && $this->params['action'] === 'add' || $this->params['controller'] === 'Themes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Themes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
 <?php if ($this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'add' || $this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'edit'): ?>
     <?php echo $this->Element('navigation'); ?>
 <?php endif; ?>
@@ -111,5 +141,35 @@
 <?php endif; ?>
 
 <?php if ($this->params['controller'] === 'Movies' && $this->params['action'] === 'add' || $this->params['controller'] === 'Movies' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Shifts' && $this->params['action'] === 'add' || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Shifts' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Courses' && $this->params['action'] === 'add' || $this->params['controller'] === 'Courses' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Courses' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Semesters' && $this->params['action'] === 'add' || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Semesters' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Usertypes' && $this->params['action'] === 'add' || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Usertypes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'add' || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'SocialTypes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Themes' && $this->params['action'] === 'add' || $this->params['controller'] === 'Themes' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Themes' && $this->params['action'] === 'edit'): ?>
     <?php echo $this->Element('footer'); ?>
 <?php endif; ?>
