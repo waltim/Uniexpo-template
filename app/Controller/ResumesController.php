@@ -13,12 +13,12 @@ class ResumesController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Resume->find('first',array('conditions'=>array('Resume.id'=>$id)));
             if($this->Resume->saveField("Aceito","S")){
-                $this->Session->setFlash(__('O curriculo do usuário "'.$usuario['User']['username'].'"foi aprovado!'));
+                $this->Session->setFlash(__('O curriculo do usuário foi aprovado!'), 'flash/success');
                 $this->redirect(array('action'=>'index'));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -28,12 +28,12 @@ class ResumesController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Resume->find('first',array('conditions'=>array('Resume.id'=>$id)));
             if($this->Resume->saveField("Aceito","N")){
-                $this->Session->setFlash(__('O curriculo do usuário "'.$usuario['User']['username'].'" foi reprovado!'));
+                $this->Session->setFlash(__('O curriculo do usuário "'.$usuario['User']['username'].'" foi reprovado!'),'flash/success');
                 $this->redirect(array('action'=>'index'));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -98,15 +98,15 @@ class ResumesController extends AppController
                 $this->Resume->create();
                 $this->request->data['Resume']['user_id'] = $this->Session->read('Auth.User.id');
                 if ($this->Resume->save($this->request->data)) {
-                    $this->Session->setFlash(__('Seu curriculo foi salvo com sucesso!'));
+                    $this->Session->setFlash(__('Seu curriculo foi salvo com sucesso!'),'flash/success');
                     $this->redirect(array('controller' => 'Resumes', 'action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('O curriculo não pode ser salvo, por favor tente novamente.'));
+                    $this->Session->setFlash(__('O curriculo não pode ser salvo, por favor tente novamente.'),'flash/error');
                 }
             }
         }
         else {
-            $this->Session->setFlash(__('Você só pode adicionar 1 curriculo.'));
+            $this->Session->setFlash(__('Você só pode adicionar 1 curriculo.'),'flash/info');
             $this->redirect(array('controller' => 'Resumes', 'action' => 'index'));
         }
         $novidades = $this->Resume->User->find('list');
@@ -130,10 +130,10 @@ class ResumesController extends AppController
         $this->Resume->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Resume->save($this->request->data)) {
-                $this->Session->setFlash(__('Seu curriculo foi salvo com sucesso!'));
+                $this->Session->setFlash(__('Seu curriculo foi salvo com sucesso!'),'flash/success');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Seu curriculo não pode ser salvo, por favor tente novamente.'));
+                $this->Session->setFlash(__('Seu curriculo não pode ser salvo, por favor tente novamente.'),'flash/error');
             }
         } else {
             $options = array('conditions' => array('Resume.' . $this->Resume->primaryKey => $id));
@@ -148,10 +148,10 @@ class ResumesController extends AppController
     {
         $this->Resume->id = $id;
         if ($this->Resume->delete()) {
-            $this->Session->setFlash(__('Seu curriculo foi apagado.'));
+            $this->Session->setFlash(__('Seu curriculo foi apagado.'),'flash/success');
             $this->redirect(array('controller' => 'Resumes', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Seu curriculo não pode ser apagado.'));
+        $this->Session->setFlash(__('Seu curriculo não pode ser apagado.'),'flash/error');
         $this->redirect(array('controller' => 'Resumes', 'action' => 'index'));
     }
 }

@@ -14,13 +14,25 @@ class User extends AppModel
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'message' => 'O nome é obrigatório'
+            )
+        ),
+        'course_id' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Selecione um curso.'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A password is required'
+                'message' => 'A senha é obrigatória'
+            )
+        ),
+        'Matricula' => array(
+            'required' => array(
+                'rule' => array('lengthBetween', 7, 9),
+                'message' => 'A matrícula deve possuir 8 caracteres'
             )
         ),
         'Email' => array(

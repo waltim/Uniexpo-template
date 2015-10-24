@@ -22,7 +22,7 @@
                     <div class="box-body">
                                 <div class="form-group">
                                     <?php echo $this->Form->label('filename', 'Selecione um arquivo do tipo (.pdf)'); ?>
-                                    <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'application/pdf')); ?>
+                                    <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'application/pdf','required')); ?>
                                 </div>
                                 <!-- .form-group -->
 

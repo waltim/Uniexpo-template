@@ -50,7 +50,7 @@ class SemestersController extends AppController{
             $this->set('tipos', $this->paginate());
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -70,7 +70,7 @@ class SemestersController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->Semester->save($this->data))
-                    $this->Session->setFlash('O semestre foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O semestre foi salvo com sucesso!', 'flash/success'));
                 $this->redirect(array('action' => 'index'));
                 $this->data = array();
             }
@@ -78,7 +78,7 @@ class SemestersController extends AppController{
             $this->set(compact('tipos'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -101,7 +101,7 @@ class SemestersController extends AppController{
             $this->Semester->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->Semester->save($this->request->data)) {
-                    $this->Session->setFlash('O semestre foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O semestre foi salvo com sucesso!'), 'flash/success');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('O semestre não pode ser salvo, por favor tente novamente.'), 'flash/error');
@@ -114,7 +114,7 @@ class SemestersController extends AppController{
             $this->set(compact('tipos'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -123,14 +123,14 @@ class SemestersController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($id){
                 if($this->Semester->delete($id))
-                    $this->Session->setFlash('Deletado com sucesso!');
+                    $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');
                 $this->redirect(array('controller' => 'Courses','action' => 'index'));
             }
             $this->Session->setFlash(__('O semestre não pode ser apagado.'), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }

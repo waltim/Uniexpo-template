@@ -42,7 +42,7 @@ class ShiftsController extends AppController{
             $this->set('tipos', $this->paginate());
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -61,13 +61,13 @@ class ShiftsController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->Shift->save($this->data))
-                    $this->Session->setFlash('O período foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O período foi salvo com sucesso!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
                 $this->data = array();
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $$this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -88,7 +88,7 @@ class ShiftsController extends AppController{
             $this->Shift->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->Shift->save($this->request->data)) {
-                    $this->Session->setFlash('O período foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O período foi salvo com sucesso!'),'flash/success');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('O período não pode ser salvo, por favor tente novamente.'), 'flash/error');
@@ -99,7 +99,7 @@ class ShiftsController extends AppController{
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -108,14 +108,14 @@ class ShiftsController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($id){
                 if($this->Shift->delete($id))
-                    $this->Session->setFlash('Deletado com sucesso!');
+                    $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');
                 $this->redirect(array('controller' => 'Shifts','action' => 'index'));
             }
             $this->Session->setFlash(__('O período não pode ser apagado.'), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }

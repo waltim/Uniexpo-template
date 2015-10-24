@@ -22,12 +22,12 @@ class MoviesController extends AppController {
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Movie->find('first',array('conditions'=>array('Movie.id'=>$id)));
             if($this->Movie->saveField("Aceito","S")){
-                $this->Session->setFlash(__('O vídeo do projeto foi aprovado!'));
+                $this->Session->setFlash(__('O vídeo do projeto foi aprovado!'),'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -37,12 +37,12 @@ class MoviesController extends AppController {
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Movie->find('first',array('conditions'=>array('Movie.id'=>$id)));
             if($this->Movie->saveField("Aceito","N")){
-                $this->Session->setFlash(__('O vídeo do projeto foi reprovado!'));
+                $this->Session->setFlash(__('O vídeo do projeto foi reprovado!'),'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -83,19 +83,19 @@ class MoviesController extends AppController {
                 'conditions' => array('project_id' =>$idProjeto)
             ));
 
-            if($qntImagens <= 4){
+            if($qntImagens <= 3){
 
                 $this->Movie->create();
                 $this->request->data['Movie']['project_id']=$idProjeto;
                 if ($this->Movie->save($this->request->data)) {
-                    $this->Session->setFlash(__('O vídeo foi salvo com sucesso!'));
+                    $this->Session->setFlash(__('O vídeo foi salvo com sucesso!'),'flash/success');
                     $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
                 } else {
-                    $this->Session->setFlash(__('O vídeo não pode ser salvo, por favor tente novamente.'));
+                    $this->Session->setFlash(__('O vídeo não pode ser salvo, por favor tente novamente.'),'flash/error');
                 }
             }
             else{
-                $this->Session->setFlash(__('Você só pode adicionar 05 vídeos por Projeto.'));
+                $this->Session->setFlash(__('Você só pode adicionar 04 vídeos por Projeto.'),'flash/info');
             }
         }
         $projetoimages = $this->Movie->Project->find('list');
@@ -120,10 +120,10 @@ class MoviesController extends AppController {
         $this->Movie->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Movie->save($this->request->data)) {
-				$this->Session->setFlash(__('O vídeo do projeto foi salvo com sucesso!'));
+				$this->Session->setFlash(__('O vídeo do projeto foi salvo com sucesso!'),'flash/success');
                 $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
 			} else {
-				$this->Session->setFlash(__('O vídeo não pode ser salvo, por favor tente novamente.'));
+				$this->Session->setFlash(__('O vídeo não pode ser salvo, por favor tente novamente.'),'flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('Movie.' . $this->Movie->primaryKey => $id));
@@ -137,13 +137,13 @@ class MoviesController extends AppController {
 	public function delete($id = null) {
 		$this->Movie->id = $id;
 		if (!$this->Movie->exists()) {
-			throw new NotFoundException(__('O vídeo está inválido.'));
+            $this->Session->setFlash(__('O vídeo está inválido.'),'flash/error');
 		}
 		if ($this->Movie->delete()) {
-			$this->Session->setFlash(__('O vídeo foi apagado.'));
+			$this->Session->setFlash(__('O vídeo foi apagado.'),'flash/success');
 			$this->redirect(array('controller'=>'Projects','action' => 'index'));
 		}
-		$this->Session->setFlash(__('O vídeo não pode ser apagado.'));
+		$this->Session->setFlash(__('O vídeo não pode ser apagado.'),'flash/error');
         $this->redirect(array('controller'=>'Projects','action' => 'index'));
 	}
 }

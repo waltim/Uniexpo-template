@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <?php echo $this->Form->label('filename', 'Clique aqui e escolha a imagem'); ?>
-                            <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'image/jpeg')); ?>
+                            <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'image/jpeg','required')); ?>
                         </div>
                         <!-- .form-group -->
 

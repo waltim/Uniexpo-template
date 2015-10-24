@@ -11,6 +11,15 @@ class Skill extends AppModel
 
     public $displayField = 'Nome';
 
+    public $validate = array(
+        'Nome' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Este campo é obrigatorio.'
+            )
+        )
+    );
+
     public $belongsTo = array(
         'Course' => array(
             'className' => 'Course',

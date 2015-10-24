@@ -28,11 +28,11 @@ class ProjectsController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Project->find('first', array('conditions' => array('Project.id' => $id)));
             if ($this->Project->saveField("Aceito", "S")) {
-                $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '"foi aprovado!'));
+                $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '"foi aprovado!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -43,11 +43,11 @@ class ProjectsController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Project->find('first', array('conditions' => array('Project.id' => $id)));
             if ($this->Project->saveField("Aceito", "N")) {
-                $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '" foi reprovado!'));
+                $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '" foi reprovado!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -115,7 +115,7 @@ class ProjectsController extends AppController
 
 
         if (!$this->Project->exists($id)) {
-            throw new NotFoundException(__('Projeto está inválido.'));
+            $this->Session->setFlash(__('Projeto está inválido.'), 'flash/error');
         }
         $options = array('conditions' => array('Project.' . $this->Project->primaryKey => $id));
         $this->set('novidade', $this->Project->find('first', $options));
@@ -174,10 +174,10 @@ class ProjectsController extends AppController
                 $data['Project']['Descricao'] = $this->request->data['Project']['Descricao'];
                 $data['Project']['Aceito'] = $this->request->data['Project']['Aceito'];
                 if ($this->Project->save($data)) {
-                    $this->Session->setFlash(__('seu projeto foi salvo com sucesso!'));
+                    $this->Session->setFlash(__('seu projeto foi salvo com sucesso!'),'flash/success');
                     $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('seu projeto nao pode ser salvo, por favor tente novamente.'));
+                    $this->Session->setFlash(__('seu projeto nao pode ser salvo, por favor tente novamente.'),'flash/error');
                 }
             }
         $novidades = $this->Project->ProjectType->find('list');
@@ -205,10 +205,10 @@ class ProjectsController extends AppController
         $this->Project->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Project->save($this->request->data)) {
-                $this->Session->setFlash(__('Seu projeto foi salvo com sucesso!'));
+                $this->Session->setFlash(__('Seu projeto foi salvo com sucesso!'),'flash/success');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Seu projeto não pode ser salvo, por favor tente novamente.'));
+                $this->Session->setFlash(__('Seu projeto não pode ser salvo, por favor tente novamente.'),'flash/error');
             }
         } else {
             $options = array('conditions' => array('Project.' . $this->Project->primaryKey => $id));
@@ -230,13 +230,13 @@ class ProjectsController extends AppController
 
         $this->Project->id = $id;
         if (!$this->Project->exists()) {
-            throw new NotFoundException(__('Seu projeto está inválido.'));
+            $this->Session->setFlash(__('Seu projeto está inválido.'), 'flash/error');
         }
         if ($this->Project->delete()) {
-            $this->Session->setFlash(__('Seu projeto foi apagado.'));
+            $this->Session->setFlash(__('Seu projeto foi apagado.'), 'flash/success');
             $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Seu projeto não pode ser apagado.'));
+        $this->Session->setFlash(__('Seu projeto não pode ser apagado.'), 'flash/error');
         $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
     }
 }

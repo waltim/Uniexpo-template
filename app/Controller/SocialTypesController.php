@@ -41,7 +41,7 @@ class SocialTypesController extends AppController{
             $this->set('tipos', $this->paginate());
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -61,13 +61,13 @@ class SocialTypesController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->SocialType->save($this->data))
-                    $this->Session->setFlash('O tipo de social foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O tipo de social foi salvo com sucesso!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
                 $this->data = array();
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -90,7 +90,7 @@ class SocialTypesController extends AppController{
             $this->SocialType->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->SocialType->save($this->request->data)) {
-                    $this->Session->setFlash('O tipo de social foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O tipo de social foi salvo com sucesso!'), 'flash/success');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('O tipo de social não pode ser salvo, por favor tente novamente.'), 'flash/error');
@@ -101,7 +101,7 @@ class SocialTypesController extends AppController{
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -110,14 +110,14 @@ class SocialTypesController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($id){
                 if($this->SocialType->delete($id))
-                    $this->Session->setFlash('Deletado com sucesso!');
+                    $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');
                 $this->redirect(array('controller' => 'SocialTypes','action' => 'index'));
             }
             $this->Session->setFlash(__('O tipo de social não pode ser apagado.'), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }

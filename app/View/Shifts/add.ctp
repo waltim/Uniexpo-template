@@ -22,7 +22,7 @@
                     <div class="box-body">
                                <div class="form-group">
                                     <?php echo $this->Form->label('descricao', 'Nome do período'); ?>
-                                    <?php echo $this->Form->input('descricao', array('class' => 'form-control')); ?>
+                                    <?php echo $this->Form->input('descricao', array('class' => 'form-control','required')); ?>
                                 </div>
                         </div>
 

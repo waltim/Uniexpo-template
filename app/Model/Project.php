@@ -79,7 +79,7 @@ class Project extends AppModel{
         'Movie' => array(
             'className' => 'Movie',
             'foreignKey' => 'project_id',
-            'dependent' => false,
+            'dependent' => true,
             'conditions' => '',
             'fields' => '',
             'order' => '',
@@ -92,7 +92,7 @@ class Project extends AppModel{
         'ProjectImage' => array(
             'className' => 'ProjectImage',
             'foreignKey' => 'project_id',
-            'dependent' => false,
+            'dependent' => true,
             'conditions' => '',
             'fields' => '',
             'order' => '',
@@ -105,7 +105,7 @@ class Project extends AppModel{
         'ProjectUser' => array(
             'className' => 'ProjectUser',
             'foreignKey' => 'project_id',
-            'dependent' => false,
+            'dependent' => true,
             'conditions' => '',
             'fields' => '',
             'order' => '',

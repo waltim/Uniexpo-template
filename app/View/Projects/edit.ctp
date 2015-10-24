@@ -22,22 +22,22 @@
 
                     <div class="form-group">
                         <?php echo $this->Form->input('project_type_id', array('options' => $novidades, 'empty' => '-Selecione o tipo do projeto-','class'=>'form-control','label'=>'Tipo de projetos',
-                            'id'=>'ProjectProjectTypeId','name'=>'data[Project][project_type_id]')); ?>
+                            'id'=>'ProjectProjectTypeId','name'=>'data[Project][project_type_id]','required')); ?>
                     </div>
 
                     <div class="form-group">
                         <?php echo $this->Form->input('theme_id', array('options' => $temas, 'empty' => '-Selecione o tema-','class'=>'form-control','label'=>'Temas',
-                            'id'=>'ProjectThemeId','name'=>'data[Project][theme_id]')); ?>
+                            'id'=>'ProjectThemeId','name'=>'data[Project][theme_id]','required')); ?>
                     </div>
 
                     <div class="form-group">
                         <?php echo $this->Form->label('Titulo', 'Titulo do projeto'); ?>
-                        <?php echo $this->Form->input('Titulo', array('class' => 'form-control')); ?>
+                        <?php echo $this->Form->input('Titulo', array('class' => 'form-control','required')); ?>
                     </div>
 
                     <div class="form-group">
                         <?php echo $this->Form->label('Descricao', 'Descrição do Projeto'); ?>
-                        <?php echo $this->Form->input('Descricao', array('class' => 'form-control')); ?>
+                        <?php echo $this->Form->input('Descricao', array('class' => 'form-control','required')); ?>
                     </div>
 
                     <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>

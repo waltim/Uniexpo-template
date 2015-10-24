@@ -8,8 +8,19 @@
 
 class Movie extends AppModel{
 
-    public $belongsTo = array(
 
+
+    public $validate = array(
+        'Link' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Este campo é obrigatorio.'
+            )
+        )
+    );
+
+
+    public $belongsTo = array(
         'Project' => array(
             'className' => 'Project',
             'foreignKey' => 'project_id',

@@ -36,7 +36,7 @@ class UsertypesController extends AppController{
             $this->set('tipos',$tipos,$this->paginate());
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -56,13 +56,13 @@ class UsertypesController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($this->data){
                 if($this->user_types->save($this->data))
-                    $this->Session->setFlash('O tipo de usuário foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O tipo de usuário foi salvo com sucesso!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
                 $this->data = array();
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -83,7 +83,7 @@ class UsertypesController extends AppController{
             $this->user_types->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->user_types->save($this->request->data)) {
-                    $this->Session->setFlash('O tipo de usuário foi salvo com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('O tipo de usuário foi atualizado com sucesso!'), 'flash/success');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('O tipo de usuário não pode ser salvo, por favor tente novamente.'), 'flash/error');
@@ -94,7 +94,7 @@ class UsertypesController extends AppController{
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -103,14 +103,14 @@ class UsertypesController extends AppController{
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if($id){
                 if($this->user_types->delete($id))
-                    $this->Session->setFlash('Deletado com sucesso!');
+                    $this->Session->setFlash(__('O tipo de usuário foi deletado com sucesso!'), 'flash/info');
                 $this->redirect(array('controller' => 'Usertypes','action' => 'index'));
             }
             $this->Session->setFlash(__('O tipo de usuário não pode ser apagado.'), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }

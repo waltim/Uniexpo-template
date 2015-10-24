@@ -11,13 +11,13 @@
             <div class="form-group">
                 <?php
                 echo $this->Form->input('course_id', array('options' => $cursos, 'empty' => '-Selecione um curso-','class'=>'form-control','label'=>'Cursos',
-                'id'=>'UserCourseId','name'=>'data[User][course_id]'));
+                'id'=>'UserCourseId','name'=>'data[User][course_id]','required'));
                 ?>
             </div>
             <div class="form-group">
                 <?php
                 echo $this->Form->input('semester_id', array('empty' => '-Nenhum curso selecionado-','class'=>'form-control','label'=>'Semestres',
-                    'id'=>'UserSemesterId','name'=>'data[User][semester_id]'));
+                    'id'=>'UserSemesterId','name'=>'data[User][semester_id]','required'));
                 ?>
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" name="data[User][Matricula]" id="UserMatricula"
-                       placeholder="Matrícula" required="required"/>
+                       placeholder="Ex: 11065814" pattern=".{8,}" title="A matrícula deve possuir 8 caracteres." required="required"/>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -56,7 +56,7 @@
                         <i class="fa fa-phone"></i>
                     </div>
                     <input type="text" class="form-control" name="data[User][Telefone]" maxlength="25" id="UserTelefone"
-                           data-inputmask='"mask": "(999) 9999-9999"' data-mask/>
+                           data-inputmask='"mask": "(999)99999-9999"' data-mask/>
                 </div>
             </div>
 

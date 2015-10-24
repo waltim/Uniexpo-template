@@ -21,7 +21,7 @@
                     <div class="box-body">
                                 <div class="form-group">
                                     <?php echo $this->Form->label('Descricao', 'Nome do tipo'); ?>
-                                    <?php echo $this->Form->input('Descricao', array('class' => 'form-control')); ?>
+                                    <?php echo $this->Form->input('Descricao', array('class' => 'form-control','required')); ?>
                                 </div>
                         </div>
                         <div class="box-footer">

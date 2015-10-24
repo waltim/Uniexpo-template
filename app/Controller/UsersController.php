@@ -65,7 +65,7 @@ class UsersController extends AppController
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
             $this->set('tipoView', $this->User->find('first', $options));
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -81,7 +81,7 @@ class UsersController extends AppController
                 $this->redirect(array('action' => 'index'));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -96,7 +96,7 @@ class UsersController extends AppController
                 $this->redirect(array('action' => 'index'));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -119,7 +119,7 @@ class UsersController extends AppController
                 )
             ));
             if ($this->Auth->login()) {
-                $this->Session->setFlash(__('Seja bem vindo Sr(a) '.$find_by_email['User']['username']), 'flash/success');
+                $this->Session->setFlash(__('Seja bem vindo Sr(a) '.$find_by_email['User']['username']), 'flash/info');
                 $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
             } else {
                 $this->Session->setFlash(__('Email e senha não conferem ou você ainda não foi aprovado por um coordenador.'), 'flash/error');
@@ -150,7 +150,7 @@ class UsersController extends AppController
             ));
             $this->set('users', $eventos, $this->paginate());
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -162,7 +162,7 @@ class UsersController extends AppController
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('Usuário registrado com sucesso!, aguarde sua aprovação por um administrador.'), 'flash/success');
-                $this->redirect(array('action' => 'login'));
+                $this->redirect(array('controller' => 'users', 'action' => 'login'));
             } else {
                 $this->Session->setFlash(__('O usuário não foi salvo, tente novamente.'), 'flash/error');
             }
@@ -185,17 +185,17 @@ class UsersController extends AppController
         if ($this->Session->read('Auth.User.id') == $id) {
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('Informações atualizadas com sucesso.'));
+                    $this->Session->setFlash(__('Informações atualizadas com sucesso.'), 'flash/success');
                     $this->redirect(array('action' => 'perfil'));
                 } else {
-                    $this->Session->setFlash(__('Usuário não pode ser salvo, por favor tente novamente.'));
+                    $this->Session->setFlash(__('Usuário não pode ser salvo, por favor tente novamente.'), 'flash/error');
                 }
             } else {
                 $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
                 $this->request->data = $this->User->find('first', $options);
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
         $semestres = $this->User->Semester->find('list');

@@ -25,11 +25,11 @@
                         </div>
                         <div class="form-group">
                             <?php echo $this->Form->label('shift_id', 'Período'); ?>
-                            <?php echo $this->Form->input('shift_id', array('options'=>$tipos,'class' => 'form-control')); ?>
+                            <?php echo $this->Form->input('shift_id', array('options'=>$tipos,'class' => 'form-control','required')); ?>
                         </div>
                         <div class="form-group">
                             <?php echo $this->Form->label('Nome', 'Nome do curso'); ?>
-                            <?php echo $this->Form->input('Nome', array('class' => 'form-control')); ?>
+                            <?php echo $this->Form->input('Nome', array('class' => 'form-control','required')); ?>
                         </div>
                     </div>
 

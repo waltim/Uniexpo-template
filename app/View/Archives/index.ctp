@@ -57,9 +57,9 @@
                                         <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
                                             <?php
                                             if ($novidadeImage['Archive']['Aceito'] == 'N'):
-                                                echo $this->Html->link(__('Aprovar Arquivo'), array('action' => 'aprovar', $novidadeImage['Archive']['id']), array('class' => 'btn btn-default btn-xs'));
+                                                echo $this->Html->link(__('Aprovar Arquivo'), array('action' => 'aprovar', $novidadeImage['Archive']['id'],$idProjeto=$novidadeImage['Archive']['project_id'],$idUsuario=$novidadeImage['Project']['user_id']), array('class' => 'btn btn-default btn-xs'));
                                             else:
-                                                echo $this->Html->link(__('Desaprovar Arquivo'), array('action' => 'desaprovar', $novidadeImage['Archive']['id']), array('class' => 'btn btn-default btn-xs'));
+                                                echo $this->Html->link(__('Desaprovar Arquivo'), array('action' => 'desaprovar', $novidadeImage['Archive']['id'],$idProjeto=$novidadeImage['Archive']['project_id'],$idUsuario=$novidadeImage['Project']['user_id']), array('class' => 'btn btn-default btn-xs'));
                                             endif;
                                             ?>
                                         <?php endif; ?>

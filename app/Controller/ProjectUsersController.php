@@ -27,11 +27,11 @@ class ProjectUsersController extends AppController
         if ($this->Session->read('Auth.User.id') == $idUsuario) {
             $usuario = $this->ProjectUser->find('first', array('conditions' => array('ProjectUser.id' => $id)));
             if ($this->ProjectUser->saveField("Aceito", "S")) {
-                $this->Session->setFlash(__('A participação do aluno foi aprovada!'));
+                $this->Session->setFlash(__('A participação do aluno foi aprovada!'),'flash/success');
                 $this->redirect(array('controller' => 'Projects', 'action' => 'view', $idProjeto, $idUsuario));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -42,11 +42,11 @@ class ProjectUsersController extends AppController
         if ($this->Session->read('Auth.User.id') == $idUsuario) {
             $usuario = $this->ProjectUser->find('first', array('conditions' => array('ProjectUser.id' => $id)));
             if ($this->ProjectUser->saveField("Aceito", "N")) {
-                $this->Session->setFlash(__('A participação do aluno no projeto foi retirada!'));
+                $this->Session->setFlash(__('A participação do aluno no projeto foi retirada!'),'flash/success');
                 $this->redirect(array('controller' => 'Projects', 'action' => 'view', $idProjeto, $idUsuario));
             }
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -60,7 +60,7 @@ class ProjectUsersController extends AppController
             $data['ProjectUser']['project_id'] = $idProjeto;
             $data['ProjectUser']['Aceito'] = 'N';
             if ($this->ProjectUser->save($data))
-                $this->Session->setFlash('Você solicitou a participação do projeto, aguarde a aprovação do lider!', 'default', array('class' => 'success'));
+                $this->Session->setFlash(__('Você solicitou a participação do projeto, aguarde a aprovação do lider!'),'flash/success');
             $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
             $this->data = array();
         }
@@ -75,14 +75,13 @@ class ProjectUsersController extends AppController
     {
         $this->ProjectUser->id = $idProjeto;
         if (!$this->ProjectUser->exists()) {
-            throw new NotFoundException(__('Projeto está inválido.'));
-            $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
-        }
-        if ($this->ProjectUser->delete()) {
-            $this->Session->setFlash(__('Você saiu deste projeto.'));
             $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Não pode sair deste projeto, tente novamente.'));
+        if ($this->ProjectUser->delete()) {
+            $this->Session->setFlash(__('Você saiu deste projeto.'),'flash/success');
+            $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
+        }
+        $this->Session->setFlash(__('Não pode sair deste projeto, tente novamente.','flash/error'));
         $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
     }
 

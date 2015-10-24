@@ -27,12 +27,12 @@
 
                         <div class="form-group">
                             <?php echo $this->Form->label('social_type_id', 'Tipo da rede social'); ?>
-                            <?php echo $this->Form->input('social_type_id',array('options'=> $novidades,'class' => 'form-control')); ?>
+                            <?php echo $this->Form->input('social_type_id',array('options'=> $novidades,'class' => 'form-control','required')); ?>
                         </div>
 
                         <div class="form-group">
                             <?php echo $this->Form->label('Link', 'Cole aqui o link do perfil da sua rede social!'); ?>
-                            <?php echo $this->Form->input('Link', array('class' => 'form-control','placeholder'=>'ex:https://www.facebook.com/walter.lucas.12')); ?>
+                            <?php echo $this->Form->input('Link', array('class' => 'form-control','placeholder'=>'ex:https://www.facebook.com/walter.lucas.12','required')); ?>
                         </div>
 
                         <div class="input text required">

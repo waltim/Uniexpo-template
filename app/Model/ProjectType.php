@@ -10,6 +10,21 @@ class ProjectType extends  AppModel{
 
     public $displayField = 'Sigla';
 
+    public $validate = array(
+        'Sigla' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Este campo é obrigatorio.'
+            )
+        ),
+        'Nome' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Este campo é obrigatorio.'
+            )
+        )
+    );
+
     public $hasMany = array(
         'Project' => array(
             'className' => 'Project',

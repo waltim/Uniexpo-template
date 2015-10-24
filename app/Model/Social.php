@@ -3,6 +3,15 @@
 class Social extends AppModel
 {
 
+    public $validate = array(
+        'Link' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Este campo é obrigatorio.'
+            )
+        )
+    );
+
 
     public $belongsTo = array(
         'social_types' => array(

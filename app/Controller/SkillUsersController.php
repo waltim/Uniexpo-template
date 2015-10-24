@@ -36,7 +36,7 @@ class SkillUsersController extends AppController
             ));
             $this->set('tipos',$eventos ,$this->paginate());
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
 
@@ -50,10 +50,11 @@ class SkillUsersController extends AppController
             $this->SkillUser->create();
             $data['SkillUser']['user_id'] = $this->Auth->user('id');
             $data['SkillUser']['skill_id'] = $idSkill;
-                if ($this->SkillUser->save($data))
-                    $this->Session->setFlash('A habilidade registrada na sua lista de competências!', 'default', array('class' => 'success'));
-                $this->redirect(array('controller'=> 'Users' , 'action' => 'perfil'));
-                $this->data = array();
+                if ($this->SkillUser->save($data)) {
+                    $this->Session->setFlash(__('A habilidade registrada na sua lista de competências!'), 'flash/success');
+                    $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
+                    $this->data = array();
+                }
         }
         $tipos = $this->SkillUser->Skill->find('list');
         $this->set(compact('tipos'));
@@ -62,18 +63,17 @@ class SkillUsersController extends AppController
     }
 
 
-
     public function unLinkSkill($idSkill = null){
         $this->SkillUser->id = $idSkill;
         if (!$this->SkillUser->exists()) {
-            throw new NotFoundException(__('Skill está inválido.'));
+            $this->Session->setFlash(__('Skill invalida'), 'flash/info');
             $this->redirect(array('controller'=> 'Users' , 'action' => 'perfil'));
         }
         if ($this->SkillUser->delete()) {
-            $this->Session->setFlash(__('Habilidade retirado da sua lista de competências.'));
+            $this->Session->setFlash(__('Habilidade retirado da sua lista de competências.'), 'flash/success');
             $this->redirect(array('controller'=> 'Users' , 'action' => 'perfil'));
         }
-        $this->Session->setFlash(__('Skill não pode ser retirada, tente novamente.'));
+        $this->Session->setFlash(__('Skill não pode ser retirada, tente novamente.'), 'flash/error');
         $this->redirect(array('controller'=> 'Users' , 'action' => 'perfil'));
     }
 

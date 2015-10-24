@@ -17,7 +17,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputFile">Selecionar curriculum</label>
-                            <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'application/pdf')); ?>
+                            <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'application/pdf','required')); ?>
                             <p class="help-block">Selecione um arquivo de texto com extensão '.pdf'</p>
                         </div>
                         <!-- .form-group -->

@@ -19,7 +19,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <?php echo $this->Form->label('filename', 'Selecione uma imagem do tipo(.jpg) e de tamanho maximo 2MB.'); ?>
-                                <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'image/jpeg')); ?>
+                                <?php echo $this->Form->input('filename', array('class' => 'form-control', 'type' => 'file','accept'=>'image/jpeg','required')); ?>
                             </div>
                             <!-- .form-group -->
 

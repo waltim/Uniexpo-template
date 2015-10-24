@@ -13,12 +13,12 @@ public $uses = array('User','UserImage','ProjectImage');
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->ProjectImage->find('first',array('conditions'=>array('ProjectImage.id'=>$id)));
             if($this->ProjectImage->saveField("Aceito","S")){
-                $this->Session->setFlash(__('A imagem do projeto foi aprovada!'));
+                $this->Session->setFlash(__('A imagem do projeto foi aprovada!'), 'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -28,12 +28,12 @@ public $uses = array('User','UserImage','ProjectImage');
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->ProjectImage->find('first',array('conditions'=>array('ProjectImage.id'=>$id)));
             if($this->ProjectImage->saveField("Aceito","N")){
-                $this->Session->setFlash(__('A imagem do projeto foi reprovada!'));
+                $this->Session->setFlash(__('A imagem do projeto foi reprovada!'), 'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -63,14 +63,14 @@ public $uses = array('User','UserImage','ProjectImage');
                 $this->ProjectImage->create();
                 $this->request->data['ProjectImage']['project_id']=$idProjeto;
                 if ($this->ProjectImage->save($this->request->data)) {
-                    $this->Session->setFlash(__('A imagem foi salva com sucesso!'));
+                    $this->Session->setFlash(__('A imagem foi salva com sucesso!'), 'flash/success');
                     $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
                 } else {
-                    $this->Session->setFlash(__('A imagem não pode ser salva, por favor tente novamente.'));
+                    $this->Session->setFlash(__('A imagem não pode ser salva, por favor tente novamente.'), 'flash/error');
                 }
             }
             else{
-                $this->Session->setFlash(__('Você só pode adicionar 10 imagens por Projeto.'));
+                $this->Session->setFlash(__('Você só pode adicionar 10 imagens por Projeto.'), 'flash/info');
             }
         }
         $projetoimages = $this->ProjectImage->Project->find('list');
@@ -94,10 +94,10 @@ public $uses = array('User','UserImage','ProjectImage');
         $this->ProjectImage->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->ProjectImage->save($this->request->data)) {
-				$this->Session->setFlash(__('a imagem do projeto foi salva com sucesso!'));
+				$this->Session->setFlash(__('a imagem do projeto foi salva com sucesso!'), 'flash/success');
                 $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
 			} else {
-				$this->Session->setFlash(__('A imagem não pode ser salva, por favor tente novamente.'));
+				$this->Session->setFlash(__('A imagem não pode ser salva, por favor tente novamente.'), 'flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('ProjectImage.' . $this->ProjectImage->primaryKey => $id));
@@ -111,13 +111,13 @@ public $uses = array('User','UserImage','ProjectImage');
 	public function delete($id = null,$idProjeto= null) {
 		$this->ProjectImage->id = $id;
 		if (!$this->ProjectImage->exists()) {
-			throw new NotFoundException(__('A imagem está inválida.'));
+            $this->Session->setFlash(__('A imagem está inválida.'), 'flash/error');
 		}
 		if ($this->ProjectImage->delete()) {
-			$this->Session->setFlash(__('A Imagem foi apagada.'));
+			$this->Session->setFlash(__('A Imagem foi apagada.'), 'flash/success');
 			$this->redirect(array('controller'=>'Projects','action' => 'index'));
 		}
-		$this->Session->setFlash(__('A Imagem não pode ser apagada.'));
+		$this->Session->setFlash(__('A Imagem não pode ser apagada.'), 'flash/error');
         $this->redirect(array('controller'=>'Projects','action' => 'index'));
 	}
 }

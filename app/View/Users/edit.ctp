@@ -15,13 +15,13 @@
             <div class="form-group">
                 <?php
                 echo $this->Form->input('course_id', array('options' => $cursos, 'empty' => '-Selecione um curso-','class'=>'form-control','label'=>'Cursos',
-                    'id'=>'UserCourseId','name'=>'data[User][course_id]'));
+                    'id'=>'UserCourseId','name'=>'data[User][course_id]','required'));
                 ?>
             </div>
             <div class="form-group">
                 <?php
                 echo $this->Form->input('semester_id', array('empty' => '-Nenhum curso selecionado-','class'=>'form-control','label'=>'Semestres',
-                    'id'=>'UserSemesterId','name'=>'data[User][semester_id]'));
+                    'id'=>'UserSemesterId','name'=>'data[User][semester_id]','required'));
                 ?>
             </div>
             <div class="form-group">
@@ -31,7 +31,7 @@
                         'options' => $sexo,
                         'selected' => 1,
                         'class'=>'form-control',
-                        'label'=>'Informe seu sexo'
+                        'label'=>'Informe seu sexo',
                     )
                 );
                 ?>
@@ -39,7 +39,6 @@
             <?php
             echo $this->Form->input('username', array('label' => 'informe seu nome completo','class'=>'form-control'));
             echo $this->Form->input('Telefone', array('label' => 'informe seu telefone','class'=>'form-control'));
-            echo $this->Form->input('password', array('label' => 'atualizar senha','class'=>'form-control'));
             ?>
             <div class="input text required">
                 <input name="data[User][Aceito]" type="hidden" id="UserAceito" value="S"/>

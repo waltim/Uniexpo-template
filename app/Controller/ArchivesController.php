@@ -19,12 +19,12 @@ class ArchivesController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Archive->find('first',array('conditions'=>array('Archive.id'=>$id)));
             if($this->Archive->saveField("Aceito","S")){
-                $this->Session->setFlash(__('O arquivo do projeto foi aprovado!'));
+                $this->Session->setFlash(__('O arquivo do projeto foi aprovado!'),'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -34,12 +34,12 @@ class ArchivesController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->Archive->find('first',array('conditions'=>array('Archive.id'=>$id)));
             if($this->Archive->saveField("Aceito","N")){
-                $this->Session->setFlash(__('O arquivo do projeto foi reprovado!'));
+                $this->Session->setFlash(__('O arquivo do projeto foi reprovado!'),'flash/success');
                 $this->redirect(array('controller'=>'Projects','action'=>'view',$idProjeto,$idUsuario));
             }
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -71,7 +71,7 @@ class ArchivesController extends AppController
             $this->set('qtdCurri', $qntCurriculo);
         }
         else{
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
 
@@ -103,14 +103,14 @@ class ArchivesController extends AppController
                 $this->Archive->create();
                 $this->request->data['Archive']['project_id']=$idProjeto;
                 if ($this->Archive->save($this->request->data)) {
-                    $this->Session->setFlash(__('O arquivo foi salvo com sucesso!'));
+                    $this->Session->setFlash(__('O arquivo foi salvo com sucesso!'), 'flash/success');
                     $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
                 } else {
-                    $this->Session->setFlash(__('O arquivo não pode ser salvo, por favor tente novamente.'));
+                    $this->Session->setFlash(__('O arquivo não pode ser salvo, por favor tente novamente.'), 'flash/error');
                 }
             }
             else{
-                $this->Session->setFlash(__('Você só pode adicionar 1 arquivo por Projeto.'));
+                $this->Session->setFlash(__('Você só pode adicionar 1 arquivo por Projeto.'), 'flash/info');
             }
         }
         $novidades = $this->Archive->Project->find('list');
@@ -134,10 +134,10 @@ class ArchivesController extends AppController
         $this->Archive->id = $id;
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Archive->save($this->request->data)) {
-                $this->Session->setFlash(__('o arquivo do projeto foi salvo com sucesso!'));
+                $this->Session->setFlash(__('o arquivo do projeto foi salvo com sucesso!'), 'flash/success');
                 $this->redirect(array('controller'=>'Projects','action' => 'view',$idProjeto,$idUsuario));
             } else {
-                $this->Session->setFlash(__('o arquivo não pode ser salva, por favor tente novamente.'));
+                $this->Session->setFlash(__('o arquivo não pode ser salva, por favor tente novamente.'), 'flash/error');
             }
         } else {
             $options = array('conditions' => array('Archive.' . $this->Archive->primaryKey => $id));
@@ -152,10 +152,10 @@ class ArchivesController extends AppController
     {
         $this->Archive->id = $id;
         if ($this->Archive->delete()) {
-            $this->Session->setFlash(__('Seu arquivo foi apagado.'));
+            $this->Session->setFlash(__('Seu arquivo foi apagado.'), 'flash/success');
             $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Seu arquivo não pode ser apagado.'));
+        $this->Session->setFlash(__('Seu arquivo não pode ser apagado.'), 'flash/error');
         $this->redirect(array('controller' => 'Projects', 'action' => 'index'));
     }
 }

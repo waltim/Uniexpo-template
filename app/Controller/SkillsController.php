@@ -36,7 +36,7 @@ class SkillsController extends AppController
             ));
             $this->set('tipos',$eventos ,$this->paginate());
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
 
@@ -59,14 +59,14 @@ class SkillsController extends AppController
                 $this->Skill->create();
                 $this->request->data['Skill']['course_id']=$this->Session->read('Auth.User.course_id');
                 if ($this->Skill->save($this->request->data))
-                    $this->Session->setFlash('A habilidade foi salva com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('A habilidade foi salva com sucesso!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
                 $this->data = array();
             }
             $tipos = $this->Skill->Course->find('list');
             $this->set(compact('tipos'));
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -88,7 +88,7 @@ class SkillsController extends AppController
             $this->Skill->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->Skill->save($this->request->data)) {
-                    $this->Session->setFlash('A habilidade foi salva com sucesso!', 'default', array('class' => 'success'));
+                    $this->Session->setFlash(__('A habilidade foi atualizada com sucesso!'), 'flash/success');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('A habilidade não pode ser salva, por favor tente novamente.'), 'flash/error');
@@ -100,7 +100,7 @@ class SkillsController extends AppController
             $tipos = $this->Skill->Course->find('list');
             $this->set(compact('tipos'));
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
@@ -110,13 +110,13 @@ class SkillsController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             if ($id) {
                 if ($this->Skill->delete($id))
-                    $this->Session->setFlash('Deletado com sucesso!');
+                    $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');
                 $this->redirect(array('controller' => 'Skills', 'action' => 'index'));
             }
             $this->Session->setFlash(__('A habilidade não pode ser apagada.'), 'flash/error');
             $this->redirect(array('action' => 'index'));
         } else {
-            $this->Session->setFlash('Você não tem autorização.');
+            $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
