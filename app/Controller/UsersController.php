@@ -77,7 +77,7 @@ class UsersController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->User->find('first', array('conditions' => array('User.id' => $id)));
             if ($this->User->saveField("Aceito", "S")) {
-                $this->Session->setFlash(__('O usuário "' . $usuario['User']['username'] . '"foi aprovado!'));
+                $this->Session->setFlash(__('O usuário foi aprovado!'), 'flash/success');
                 $this->redirect(array('action' => 'index'));
             }
         } else {
@@ -92,7 +92,7 @@ class UsersController extends AppController
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $usuario = $this->User->find('first', array('conditions' => array('User.id' => $id)));
             if ($this->User->saveField("Aceito", "N")) {
-                $this->Session->setFlash(__('O usuário "' . $usuario['User']['username'] . '" foi reprovado!'));
+                $this->Session->setFlash(__('O usuário foi desaprovado!'), 'flash/info');
                 $this->redirect(array('action' => 'index'));
             }
         } else {
@@ -119,9 +119,10 @@ class UsersController extends AppController
                 )
             ));
             if ($this->Auth->login()) {
+                $this->Session->setFlash(__('Seja bem vindo Sr(a) '.$find_by_email['User']['username']), 'flash/success');
                 $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
             } else {
-                $this->Session->setFlash(__('Email ou senha incorretos.'));
+                $this->Session->setFlash(__('Email e senha não conferem ou você ainda não foi aprovado por um coordenador.'), 'flash/error');
                 $this->redirect($this->Auth->loginAction);
             }
         }
@@ -160,10 +161,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('Usuário registrado com sucesso!, aguarde sua aprovação por um administrador.'));
+                $this->Session->setFlash(__('Usuário registrado com sucesso!, aguarde sua aprovação por um administrador.'), 'flash/success');
                 $this->redirect(array('action' => 'login'));
             } else {
-                $this->Session->setFlash(__('O usuário não foi salvo, tente novamente.'));
+                $this->Session->setFlash(__('O usuário não foi salvo, tente novamente.'), 'flash/error');
             }
         }
         $semestres = $this->User->Semester->find('list');
@@ -208,7 +209,7 @@ class UsersController extends AppController
     }
     public function logout()
     {
-        $this->Session->setFlash(__('Deslogado com sucesso.'), 'default', array('class' => 'success'));
+        $this->Session->setFlash(__('Deslogado com sucesso!'), 'flash/success');
         $this->redirect($this->Auth->logout());
     }
 

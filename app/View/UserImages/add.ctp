@@ -38,19 +38,15 @@
                             </div>
 
                             <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
-
                                 <div class="input text required">
                                     <input name="data[UserImage][Aceito]" type="hidden" id="UserImageAceito" value="S"/>
                                 </div>
-
                             <?php endif; ?>
                             <?php if ($this->Session->read('Auth.User.user_type_id') == 2) : ?>
-
                                 <div class="input text required">
                                     <input name="data[UserImage][Aceito]" type="hidden" id="UserImageAceito" value="N"/>
                                 </div>
                             <?php endif; ?>
-
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Enviar</button>
@@ -59,6 +55,5 @@
                 </div>
             </div>
         </div>
-        <!-- /.box -->
     </section>
 </div>

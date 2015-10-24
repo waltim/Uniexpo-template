@@ -2,7 +2,7 @@
 App::uses('TiposController', 'Controller');
 
 
-class CoursesControllerTest extends ControllerTestCase
+class SkillsControllerTest extends ControllerTestCase
 {
 
 
@@ -29,7 +29,7 @@ class CoursesControllerTest extends ControllerTestCase
 
     public function testIndex()
     {
-        $results = $this->testAction('Courses/index/');
+        $results = $this->testAction('Skills/index/');
         debug($results);
     }
 
@@ -37,36 +37,38 @@ class CoursesControllerTest extends ControllerTestCase
     public function testAdd()
     {
         $data = array(
-            'Course' => array(
-                'shift_id' => 1,
-                'Nome' => 'Engenharia civil'
+            'Skill' => array(
+                'course_id' => 1,
+                'Nome' =>'SQL 2015',
+                'created' => '2015-08-14 04:53:03'
             )
         );
-        $results = $this->testAction('Courses/add', array('data' => $data, 'method' => 'post'));
+        $results = $this->testAction('Skills/add', array('data' => $data, 'method' => 'post'));
         debug($results);
     }
 
 
     public function testEdit()
     {
-        $results1 = $this->testAction('Courses/edit/1');
+        $results1 = $this->testAction('Skills/edit/1');
         debug($results1);
 
         $data = array(
-            'Course' => array(
-                'id' => 1,
-                'shift_id' => 2,
-                'Nome' => 'Sistemas'
+            'Skill' => array(
+                'id' => 3,
+                'course_id' => 1,
+                'Nome' =>'SQL',
+                'created' => '2015-08-14 04:53:03'
             )
         );
-        $results2 = $this->testAction('Courses/edit', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('Skills/edit', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
 
 
     public function testDelete()
     {
-        $results = $this->testAction('Courses/delete/1');
+        $results = $this->testAction('Skills/delete/1');
         debug($results);
     }
 

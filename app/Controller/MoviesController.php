@@ -66,8 +66,6 @@ class MoviesController extends AppController {
         $this->set('projetoImages',$projetoImages);
 	}
 
-
-
     public function add($idProjeto = null, $idUsuario = null) {
 
         $id2 = $this->Session->read('Auth.User.id');
@@ -80,8 +78,6 @@ class MoviesController extends AppController {
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
         $this->set('qtd', $qntFoto);
-
-
         if ($this->request->is('post')) {
             $qntImagens = $this->Movie->find('count', array(
                 'conditions' => array('project_id' =>$idProjeto)

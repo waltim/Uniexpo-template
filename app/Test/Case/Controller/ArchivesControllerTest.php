@@ -2,7 +2,7 @@
 App::uses('TiposController', 'Controller');
 
 
-class ResumesControllerTest extends ControllerTestCase
+class ArchivesControllerTest extends ControllerTestCase
 {
 
 
@@ -27,38 +27,39 @@ class ResumesControllerTest extends ControllerTestCase
         'app.ProjectUser'
     );
 
+
     public function testAprovar()
     {
-        $results1 = $this->testAction('Resumes/aprovar/1');
+        $results1 = $this->testAction('Archives/aprovar/1');
         debug($results1);
 
         $data = array(
-            'Resume' => array(
+            'Archive' => array(
                 'id' => 1,
                 'Aceito' => 'N',
             )
         );
-        $results2 = $this->testAction('Resumes/aprovar', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('Archives/aprovar', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
     public function testDesaprovar()
     {
-        $results1 = $this->testAction('Resumes/desaprovar/1');
+        $results1 = $this->testAction('Archives/desaprovar/1');
         debug($results1);
 
         $data = array(
-            'Resume' => array(
+            'Archive' => array(
                 'id' => 1,
                 'Aceito' => 'S',
             )
         );
-        $results2 = $this->testAction('Resumes/desaprovar', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('Archives/desaprovar', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
 
     public function testIndex()
     {
-        $results = $this->testAction('Resumes/index/');
+        $results = $this->testAction('Archives/index/');
         debug($results);
     }
 
@@ -66,8 +67,8 @@ class ResumesControllerTest extends ControllerTestCase
     public function testAdd()
     {
         $data = array(
-            'Resume' => array(
-                'user_id' => 1,
+            'Archive' => array(
+                'project_id' => 1,
                 'filesize' => 32165,
                 'filename' => 'curriculum_vitae-0.pdf',
                 'mimetype' => 'application/pdf',
@@ -77,19 +78,19 @@ class ResumesControllerTest extends ControllerTestCase
                 'modified' => '2015-08-14 04:53:03'
             )
         );
-        $results = $this->testAction('Resumes/add', array('data' => $data, 'method' => 'post'));
+        $results = $this->testAction('Archives/add', array('data' => $data, 'method' => 'post'));
         debug($results);
     }
 
     public function testEdit()
     {
-        $results1 = $this->testAction('Resumes/edit/1');
+        $results1 = $this->testAction('Archives/edit/1');
         debug($results1);
 
         $data = array(
-            'Resume' => array(
+            'Archive' => array(
                 'id' => 1,
-                'user_id' => 1,
+                'project_id' => 1,
                 'filesize' => 32165,
                 'filename' => 'curriculum.pdf',
                 'mimetype' => 'application/pdf',
@@ -99,13 +100,13 @@ class ResumesControllerTest extends ControllerTestCase
                 'modified' => '2015-09-14 04:53:03'
             )
         );
-        $results2 = $this->testAction('Resumes/edit', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('Archives/edit', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
 
     public function testDelete()
     {
-        $results = $this->testAction('Resumes/delete/1');
+        $results = $this->testAction('Archives/delete/1');
         debug($results);
     }
 

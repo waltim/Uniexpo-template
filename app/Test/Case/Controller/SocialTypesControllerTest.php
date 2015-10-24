@@ -7,7 +7,24 @@ class SocialTypesControllerTest extends ControllerTestCase
 
 
     public $fixtures = array(
-        'app.social_type'
+        'app.semester',
+        'app.course',
+        'app.shift',
+        'app.User',
+        'app.UserType',
+        'app.Resume',
+        'app.UserImage',
+        'app.Project',
+        'app.SkillUser',
+        'app.Skill',
+        'app.Social',
+        'app.SocialType',
+        'app.Archive',
+        'app.Movie',
+        'app.theme',
+        'app.ProjectImage',
+        'app.ProjectType',
+        'app.ProjectUser'
     );
 
     public function testIndex()

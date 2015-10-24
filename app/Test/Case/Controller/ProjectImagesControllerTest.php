@@ -2,7 +2,7 @@
 App::uses('TiposController', 'Controller');
 
 
-class UserImagesControllerTest extends ControllerTestCase
+class ProjectImagesControllerTest extends ControllerTestCase
 {
 
 
@@ -27,41 +27,41 @@ class UserImagesControllerTest extends ControllerTestCase
         'app.ProjectUser'
     );
 
-
     public function testAprovar()
     {
-        $results1 = $this->testAction('UserImages/aprovar/1');
+        $results1 = $this->testAction('ProjectImages/aprovar/1');
         debug($results1);
 
         $data = array(
-            'UserImage' => array(
+            'ProjectImage' => array(
                 'id' => 1,
                 'Aceito' => 'N',
             )
         );
-        $results2 = $this->testAction('UserImages/aprovar', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('ProjectImages/aprovar', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
     public function testDesaprovar()
     {
-        $results1 = $this->testAction('UserImages/desaprovar/1');
+        $results1 = $this->testAction('ProjectImages/desaprovar/1');
         debug($results1);
 
         $data = array(
-            'UserImage' => array(
+            'ProjectImage' => array(
                 'id' => 1,
                 'Aceito' => 'S',
             )
         );
-        $results2 = $this->testAction('UserImages/desaprovar', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('ProjectImages/desaprovar', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
+
 
     public function testAdd()
     {
         $data = array(
-            'UserImage' => array(
-                'user_id' => 1,
+            'ProjectImage' => array(
+                'project_id' => 1,
                 'filesize' => 215084,
                 'filename' => 'A_556.jpg',
                 'mimetype' => 'image/jpeg',
@@ -71,19 +71,19 @@ class UserImagesControllerTest extends ControllerTestCase
                 'modified' => '2015-08-14 04:53:03'
             )
         );
-        $results = $this->testAction('UserImages/add', array('data' => $data, 'method' => 'post'));
+        $results = $this->testAction('ProjectImages/add', array('data' => $data, 'method' => 'post'));
         debug($results);
     }
 
     public function testEdit()
     {
-        $results1 = $this->testAction('UserImages/edit/1');
+        $results1 = $this->testAction('ProjectImages/edit/1');
         debug($results1);
 
         $data = array(
-            'UserImage' => array(
+            'ProjectImage' => array(
                 'id' => 1,
-                'user_id' => 1,
+                'project_id' => 1,
                 'filesize' => 215084,
                 'filename' => 'AASDASD_556.jpg',
                 'mimetype' => 'image/jpeg',
@@ -93,13 +93,13 @@ class UserImagesControllerTest extends ControllerTestCase
                 'modified' => '2015-08-14 04:53:03'
             )
         );
-        $results2 = $this->testAction('UserImages/edit', array('data' => $data, 'method' => 'post'));
+        $results2 = $this->testAction('ProjectImages/edit', array('data' => $data, 'method' => 'post'));
         debug($results2);
     }
 
     public function testDelete()
     {
-        $results = $this->testAction('UserImages/delete/1');
+        $results = $this->testAction('ProjectImages/delete/1');
         debug($results);
     }
 

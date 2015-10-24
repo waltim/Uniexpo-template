@@ -33,6 +33,12 @@ class UsersControllerTest extends ControllerTestCase
         debug($results);
     }
 
+    public function testPerfil()
+    {
+        $results = $this->testAction('Users/perfil/');
+        debug($results);
+    }
+
 
     public function testAdd()
     {
@@ -54,6 +60,35 @@ class UsersControllerTest extends ControllerTestCase
         );
         $results = $this->testAction('Users/add', array('data' => $data, 'method' => 'post'));
         debug($results);
+    }
+
+    public function testAprovar()
+    {
+        $results1 = $this->testAction('Users/aprovar/1');
+        debug($results1);
+
+        $data = array(
+            'User' => array(
+                'id' => 1,
+                'Aceito' => 'N',
+            )
+        );
+        $results2 = $this->testAction('Users/aprovar', array('data' => $data, 'method' => 'post'));
+        debug($results2);
+    }
+    public function testDesaprovar()
+    {
+        $results1 = $this->testAction('Users/desaprovar/1');
+        debug($results1);
+
+        $data = array(
+            'User' => array(
+                'id' => 1,
+                'Aceito' => 'S',
+            )
+        );
+        $results2 = $this->testAction('Users/desaprovar', array('data' => $data, 'method' => 'post'));
+        debug($results2);
     }
 
 

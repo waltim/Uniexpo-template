@@ -16,7 +16,7 @@ class ThemeFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'Descricao' => 'Saúde'
+			'Descricao' => 'SaÃºde'
 		),
         array(
             'id' => 2,

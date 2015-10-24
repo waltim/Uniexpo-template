@@ -4339,3 +4339,7 @@ table.text-center, table.text-center td, table.text-center th {
     font-family: 'lucida grande',verdana,helvetica,arial,sans-serif;
     font-size: 90%;
 }
+
+.RedesSociais {
+    padding-right: 10%;
+}
