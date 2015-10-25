@@ -47,7 +47,8 @@ class SemestersController extends AppController{
 
         if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Semester->recursive = 0;
-            $this->set('tipos', $this->paginate());
+            $Semestres = $this->Semester->find('all');
+            $this->set('tipos',$Semestres, $this->paginate());
         }
         else{
             $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');

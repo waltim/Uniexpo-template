@@ -38,7 +38,8 @@ class CoursesController extends AppController{
 
         if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Course->recursive = 0;
-            $this->set('tipos', $this->paginate());
+            $Semestres = $this->Course->find('all');
+            $this->set('tipos',$Semestres, $this->paginate());
         }
         else{
             $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');

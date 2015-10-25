@@ -17,7 +17,6 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th><?php echo $this->Paginator->sort('Período'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Nome'); ?></th>
                                 <th class="actions"><?php echo __('Ações'); ?></th>
                             </tr>
@@ -26,7 +25,6 @@
                             <?php
                             foreach ($tipos as $t): ?>
                                 <tr>
-                                    <td><?php echo h($t['Shift']['descricao']); ?>&nbsp;</td>
                                     <td><?php echo h($t['Course']['Nome']); ?>&nbsp;</td>
                                     <td class="actions">
 
@@ -38,7 +36,6 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th><?php echo $this->Paginator->sort('Período'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Nome'); ?></th>
                                 <th class="actions"><?php echo __('Ações'); ?></th>
                             </tr>
