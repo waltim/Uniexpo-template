@@ -19,7 +19,7 @@ class MoviesController extends AppController {
 
     public function aprovar($id = null,$idProjeto = null, $idUsuario = null){
         $this->Movie->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Movie->find('first',array('conditions'=>array('Movie.id'=>$id)));
             if($this->Movie->saveField("Aceito","S")){
                 $this->Session->setFlash(__('O vídeo do projeto foi aprovado!'),'flash/success');
@@ -34,7 +34,7 @@ class MoviesController extends AppController {
 
     public function desaprovar($id = null,$idProjeto = null, $idUsuario = null){
         $this->Movie->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Movie->find('first',array('conditions'=>array('Movie.id'=>$id)));
             if($this->Movie->saveField("Aceito","N")){
                 $this->Session->setFlash(__('O vídeo do projeto foi reprovado!'),'flash/success');

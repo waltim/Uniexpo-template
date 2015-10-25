@@ -1277,7 +1277,7 @@ a:hover, a:active, a:focus {
 }
 
 .form-control {
-    border-radius: 0 !important;
+    border-radius: 20px 20px;!important;
     box-shadow: none;
     border-color: #d2d6de
 }
@@ -2284,7 +2284,8 @@ a:hover, a:active, a:focus {
 
 .btn-primary {
     background-color: #3c8dbc;
-    border-color: #367fa9
+    border-color: #367fa9;
+    float: right;
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary.hover {
@@ -4342,4 +4343,13 @@ table.text-center, table.text-center td, table.text-center th {
 
 .RedesSociais {
     padding-right: 10%;
+}
+
+.center{
+    float: none;
+    margin: 0 auto;
+}
+
+.esquerda{
+    float: none!important;
 }

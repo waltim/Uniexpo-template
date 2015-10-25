@@ -36,7 +36,7 @@ class SocialTypesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->SocialType->recursive = 2;
             $this->set('tipos', $this->paginate());
         }
@@ -58,7 +58,7 @@ class SocialTypesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($this->data){
                 if($this->SocialType->save($this->data))
                     $this->Session->setFlash(__('O tipo de social foi salvo com sucesso!'), 'flash/success');
@@ -86,7 +86,7 @@ class SocialTypesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->SocialType->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->SocialType->save($this->request->data)) {
@@ -107,7 +107,7 @@ class SocialTypesController extends AppController{
     }
     public function delete($id = null)
     {
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($id){
                 if($this->SocialType->delete($id))
                     $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');

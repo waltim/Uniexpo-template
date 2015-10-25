@@ -25,7 +25,7 @@ class ProjectsController extends AppController
     public function aprovar($id = null)
     {
         $this->Project->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Project->find('first', array('conditions' => array('Project.id' => $id)));
             if ($this->Project->saveField("Aceito", "S")) {
                 $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '"foi aprovado!'), 'flash/success');
@@ -40,7 +40,7 @@ class ProjectsController extends AppController
     public function desaprovar($id = null)
     {
         $this->Project->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Project->find('first', array('conditions' => array('Project.id' => $id)));
             if ($this->Project->saveField("Aceito", "N")) {
                 $this->Session->setFlash(__('O projeto "' . $usuario['Project']['Titulo'] . '" foi reprovado!'), 'flash/success');
@@ -86,12 +86,17 @@ class ProjectsController extends AppController
         $eventos2 = $this->Project->find('all',array('conditions' => array
         ('User.id !=' => $this->Session->read('Auth.User.id')
         )));
-
-        $porCurso = $this->Project->find('all',array('conditions' => array
-        ('User.id !=' => $this->Session->read('Auth.User.id'),
-            'Project.course_id' => $this->Session->read('Auth.User.course_id')
-        )));
-
+        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+            $porCurso = $this->Project->find('all', array('conditions' => array
+            ('User.id !=' => $this->Session->read('Auth.User.id'),
+                'Project.course_id' => $this->Session->read('Auth.User.course_id')
+            )));
+        }
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
+            $porCurso = $this->Project->find('all', array('conditions' => array
+            ('User.id !=' => $this->Session->read('Auth.User.id')
+            )));
+        }
         $this->set('qtdProjeto',$qntProjetos);
         $this->set('qtdTotal',$qntTotalProjetos);
         $this->set('ProjetosPorCurso', $porCurso, $this->paginate());

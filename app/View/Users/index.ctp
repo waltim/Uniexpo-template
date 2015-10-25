@@ -19,6 +19,7 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
+                                <th>Curso</th>
                                 <th>Semestre</th>
                                 <th>Telefone</th>
                                 <th>Email</th>
@@ -32,6 +33,7 @@
                             foreach ($users as $user): ?>
                                 <tr>
                                     <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+                                    <td><?php echo h($user['Course']['Nome']); ?>&nbsp;</td>
                                     <td><?php echo h($user['Semester']['Descricao']); ?>&nbsp;</td>
                                     <td><?php echo h($user['User']['Telefone']); ?>&nbsp;</td>
                                     <td><?php echo h($user['User']['Email']); ?>&nbsp;</td>
@@ -58,8 +60,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Semestre</th>
                                 <th>Nome</th>
+                                <th>Curso</th>
+                                <th>Semestre</th>
                                 <th>Telefone</th>
                                 <th>Email</th>
                                 <th>Data de cadastro</th>

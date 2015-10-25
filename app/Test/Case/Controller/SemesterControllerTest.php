@@ -24,6 +24,7 @@ class CoursesControllerTest extends ControllerTestCase
         'app.theme',
         'app.ProjectImage',
         'app.ProjectType',
+        'app.Visitor',
         'app.ProjectUser'
     );
 

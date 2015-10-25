@@ -10,7 +10,7 @@ class ResumesController extends AppController
 
     public function aprovar($id = null){
         $this->Resume->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Resume->find('first',array('conditions'=>array('Resume.id'=>$id)));
             if($this->Resume->saveField("Aceito","S")){
                 $this->Session->setFlash(__('O curriculo do usuário foi aprovado!'), 'flash/success');
@@ -25,7 +25,7 @@ class ResumesController extends AppController
 
     public function desaprovar($id = null){
         $this->Resume->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Resume->find('first',array('conditions'=>array('Resume.id'=>$id)));
             if($this->Resume->saveField("Aceito","N")){
                 $this->Session->setFlash(__('O curriculo do usuário "'.$usuario['User']['username'].'" foi reprovado!'),'flash/success');
@@ -50,6 +50,16 @@ class ResumesController extends AppController
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
         $this->set('qtd', $qntFoto);
+
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
+            $this->Resume->recursive = 2;
+            $eventos = $this->Resume->find('all');
+            $this->set('novidadeImages',$eventos, $this->paginate());
+            $qntCurriculo = $this->Resume->find('count', array(
+                'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
+            ));
+            $this->set('qtdCurri', $qntCurriculo);
+        }
         if ($this->Session->read('Auth.User.user_type_id') == 1) {
             $this->Resume->recursive = 2;
             $eventos = $this->Resume->find('all', array(

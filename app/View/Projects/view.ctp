@@ -130,7 +130,7 @@
                                     </td>
                                     <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                         <td class="actions">
-                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
+                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                                 <?php
                                                 if ($novidadeImage['Aceito'] == 'N'):
                                                     echo $this->Html->link(__('Aprovar imagem'), array('controller' => 'ProjectImages', 'action' => 'aprovar', $novidadeImage['id'], $idProjeto, $idUsuario = $novidade['Project']['user_id']), array('class' => 'btn btn-default btn-xs'));
@@ -154,7 +154,7 @@
             <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') && ($qntImage < 10)): ?>
                 <div class="actions">
                     <a href="<?= $admLocal ?>ProjectImages/add/<?= $idProjeto ?>/<?= $idUsuario = $novidade['Project']['user_id'] ?>"
-                       class="btn btn-primary"><i
+                       class="btn btn-primary esquerda"><i
                             class="icon-plus icon-white"></i> Nova Imagem</a>
                 </div>
             <?php endif; ?>
@@ -172,7 +172,7 @@
                         <tr>
 
                             <th><?php echo __('Pre Visualização'); ?></th>
-                            <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                            <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                 <th class="actions">Status</th>
                                 <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                     <th class="actions"><?php echo __('Ações'); ?></th>
@@ -211,7 +211,7 @@
                                     </td>
                                     <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                         <td class="actions">
-                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
+                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                                 <?php
                                                 if ($videos['Aceito'] == 'N'):
                                                     echo $this->Html->link(__('Aprovar vídeo'), array('controller' => 'Movies', 'action' => 'aprovar', $videos['id'], $idProjeto, $idUsuario = $novidade['Project']['user_id']), array('class' => 'btn btn-default btn-xs'));
@@ -236,7 +236,7 @@
             <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') && ($qntVideo < 5)): ?>
                 <div class="actions">
                     <a href="<?= $admLocal ?>Movies/add/<?= $idProjeto ?>/<?= $idUsuario = $novidade['Project']['user_id'] ?>"
-                       class="btn btn-primary"><i
+                       class="btn btn-primary esquerda"><i
                             class="icon-plus icon-white"></i> Novo vídeo</a>
                 </div>
             <?php endif; ?>
@@ -286,7 +286,7 @@
                                     </td>
                                     <?php if ($novidade['Project']['user_id'] == $this->Session->read('Auth.User.id') || $this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                         <td class="actions">
-                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
+                                            <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3 && $this->Session->read('Auth.User.course_id') == $novidade['Project']['course_id']) : ?>
                                                 <?php
                                                 if ($arquivo['Aceito'] == 'N'):
                                                     echo $this->Html->link(__('Aprovar Arquivo'), array('controller' => 'Archives', 'action' => 'aprovar', $arquivo['id'], $idProjeto, $idUsuario = $novidade['Project']['user_id']), array('class' => 'btn btn-default btn-xs'));
@@ -310,7 +310,7 @@
 
                 <div class="actions">
                     <a href="<?= $admLocal ?>Archives/add/<?= $idProjeto ?>/<?= $idUsuario = $novidade['Project']['user_id'] ?>"
-                       class="btn btn-primary"><i
+                       class="btn btn-primary esquerda"><i
                             class="icon-plus icon-white"></i> Novo arquivo</a>
                 </div>
 

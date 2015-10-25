@@ -59,7 +59,7 @@ class AppController extends Controller {
             ),
             'Form',
         );
-        $this->Auth->authorize = 'controller';
+        $this->Auth->authorize = 'Controller';
 
         $this->Auth->loginAction = array(
             'plugin' => null,

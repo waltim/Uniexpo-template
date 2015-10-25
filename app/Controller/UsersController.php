@@ -7,6 +7,7 @@
  * Time: 19:30
  */
 App::uses('AppController', 'Controller');
+
 class UsersController extends AppController
 {
 
@@ -14,7 +15,7 @@ class UsersController extends AppController
 
     public $name = 'Users';
 
-    public $uses = array('User', 'ProjectUser', 'SkillUser', 'Skill', 'Project', 'Social', 'social_types', 'UserImage','user_types','Theme');
+    public $uses = array('User', 'ProjectUser', 'SkillUser', 'Skill', 'Project', 'Social', 'social_types', 'UserImage', 'user_types', 'Theme');
 
     public function beforeFilter()
     {
@@ -61,7 +62,7 @@ class UsersController extends AppController
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
         $this->set('qtd', $qntFoto);
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
             $this->set('tipoView', $this->User->find('first', $options));
         } else {
@@ -74,7 +75,7 @@ class UsersController extends AppController
     public function aprovar($id = null)
     {
         $this->User->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->User->find('first', array('conditions' => array('User.id' => $id)));
             if ($this->User->saveField("Aceito", "S")) {
                 $this->Session->setFlash(__('O usuário foi aprovado!'), 'flash/success');
@@ -89,7 +90,7 @@ class UsersController extends AppController
     public function desaprovar($id = null)
     {
         $this->User->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->User->find('first', array('conditions' => array('User.id' => $id)));
             if ($this->User->saveField("Aceito", "N")) {
                 $this->Session->setFlash(__('O usuário foi desaprovado!'), 'flash/info');
@@ -100,6 +101,7 @@ class UsersController extends AppController
             $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
         }
     }
+
     public function login()
     {
         if (!empty($this->request->data)) {
@@ -119,7 +121,7 @@ class UsersController extends AppController
                 )
             ));
             if ($this->Auth->login()) {
-                $this->Session->setFlash(__('Seja bem vindo Sr(a) '.$find_by_email['User']['username']), 'flash/info');
+                $this->Session->setFlash(__('Seja bem vindo Sr(a) ' . $find_by_email['User']['username']), 'flash/info');
                 $this->redirect(array('controller' => 'Users', 'action' => 'perfil'));
             } else {
                 $this->Session->setFlash(__('Email e senha não conferem ou você ainda não foi aprovado por um coordenador.'), 'flash/error');
@@ -127,9 +129,10 @@ class UsersController extends AppController
             }
         }
     }
+
     public function index()
     {
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
 
             $id = $this->Session->read('Auth.User.id');
             $this->User->recursive = 2;
@@ -141,13 +144,21 @@ class UsersController extends AppController
                 'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
             ));
             $this->set('qtd', $qntFoto);
-
-            $this->User->recursive = 2;
-            $eventos = $this->User->find('all', array(
-                'conditions' => array('User.course_id' => $this->Session->read('Auth.User.course_id'),
-                    'User.id !=' => $this->Session->read('Auth.User.id')
-                )
-            ));
+            if ($this->Session->read('Auth.User.user_type_id') == 1) {
+                $this->User->recursive = 2;
+                $eventos = $this->User->find('all', array(
+                    'conditions' => array('User.course_id' => $this->Session->read('Auth.User.course_id'),
+                        'User.id !=' => $this->Session->read('Auth.User.id')
+                    )
+                ));
+            }
+            if ($this->Session->read('Auth.User.user_type_id') == 3) {
+                $this->User->recursive = 2;
+                $eventos = $this->User->find('all', array(
+                    'conditions' => array('User.id !=' => $this->Session->read('Auth.User.id')
+                    )
+                ));
+            }
             $this->set('users', $eventos, $this->paginate());
         } else {
             $this->Session->setFlash(__('Você não tem autorização.'), 'flash/error');
@@ -169,7 +180,7 @@ class UsersController extends AppController
         }
         $semestres = $this->User->Semester->find('list');
         $cursos = $this->User->Semester->Course->find('list');
-        $this->set(compact('semestres','cursos'));
+        $this->set(compact('semestres', 'cursos'));
 
         $tipos = $this->User->user_types->find('list', array('fields' => array('id', 'Descricao')));
         $this->set('tipos', $tipos);
@@ -177,6 +188,7 @@ class UsersController extends AppController
             'Feminino' => 'Feminino');
         $this->set(compact('sexo'));
     }
+
     public function edit($id = null)
     {
         $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -200,13 +212,14 @@ class UsersController extends AppController
         }
         $semestres = $this->User->Semester->find('list');
         $cursos = $this->User->Semester->Course->find('list');
-        $this->set(compact('semestres','cursos'));
+        $this->set(compact('semestres', 'cursos'));
         $tipos = $this->User->user_types->find('list', array('fields' => array('id', 'Descricao')));
         $this->set('tipos', $tipos);
         $sexo = array('Masculino' => 'Masculino',
             'Feminino' => 'Feminino');
         $this->set(compact('sexo'));
     }
+
     public function logout()
     {
         $this->Session->setFlash(__('Deslogado com sucesso!'), 'flash/success');

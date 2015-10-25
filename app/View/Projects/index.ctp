@@ -118,7 +118,7 @@
                                 <td> <?= $skill['Project']['Titulo'] ?></td>
                                 <td class="actions">
                                     <?php echo $this->Html->link(__('Sair do projeto'), array('controller' => 'ProjectUsers', 'action' => 'SairDoProjeto', $skill['ProjectUser']['id']), array('class' => 'btn btn-default btn-xs')); ?>
-                                    <a href="/uniexpo_painel/Projects/view/<?=$skill['Project']['id']?>/<?=$idUsuario=$skill['Project']['user_id']?>" class="btn btn-default btn-xs">Detalhar</a>
+                                    <a href="<?=$admLocal?>Projects/view/<?=$skill['Project']['id']?>/<?=$idUsuario=$skill['Project']['user_id']?>" class="btn btn-default btn-xs">Detalhar</a>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -130,7 +130,7 @@
                             </tr>
                             </tfoot>
                         </table>
-                        <?php if ($this->Session->read('Auth.User.user_type_id') == 1): ?>
+                        <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3): ?>
                             <div class="box-header">
                                 <h3 class="box-title">Controle de projetos</h3>
                             </div>

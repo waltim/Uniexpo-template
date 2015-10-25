@@ -102,6 +102,19 @@ class Project extends AppModel{
             'finderQuery' => '',
             'counterQuery' => ''
         ),
+        'Visitor' => array(
+            'className' => 'Visitor',
+            'foreignKey' => 'project_id',
+            'dependent' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
         'ProjectUser' => array(
             'className' => 'ProjectUser',
             'foreignKey' => 'project_id',

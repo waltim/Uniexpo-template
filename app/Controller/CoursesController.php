@@ -36,7 +36,7 @@ class CoursesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Course->recursive = 0;
             $this->set('tipos', $this->paginate());
         }
@@ -59,7 +59,7 @@ class CoursesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($this->data){
                 if($this->Course->save($this->data))
                     $this->Session->setFlash(__('O Curso foi salvo com sucesso!'),'flash/success');
@@ -88,7 +88,7 @@ class CoursesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Course->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->Course->save($this->request->data)) {
@@ -111,7 +111,7 @@ class CoursesController extends AppController{
     }
     public function delete($id = null)
     {
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($id){
                 if($this->Course->delete($id))
                     $this->Session->setFlash(__('Deletado com sucesso!'),'flash/success');

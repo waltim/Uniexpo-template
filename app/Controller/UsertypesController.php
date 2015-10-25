@@ -30,7 +30,7 @@ class UsertypesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->user_types->recursive = 2;
             $tipos = $this->user_types->find('all');
             $this->set('tipos',$tipos,$this->paginate());
@@ -53,7 +53,7 @@ class UsertypesController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($this->data){
                 if($this->user_types->save($this->data))
                     $this->Session->setFlash(__('O tipo de usuário foi salvo com sucesso!'), 'flash/success');
@@ -79,7 +79,7 @@ class UsertypesController extends AppController{
             'conditions' => array('user_id' => $this->Session->read('Auth.User.id'))
         ));
         $this->set('qtd', $qntFoto);
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->user_types->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->user_types->save($this->request->data)) {
@@ -100,7 +100,7 @@ class UsertypesController extends AppController{
     }
     public function delete($id = null)
     {
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($id){
                 if($this->user_types->delete($id))
                     $this->Session->setFlash(__('O tipo de usuário foi deletado com sucesso!'), 'flash/info');

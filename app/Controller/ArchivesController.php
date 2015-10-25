@@ -16,7 +16,7 @@ class ArchivesController extends AppController
 
     public function aprovar($id = null,$idProjeto = null, $idUsuario = null){
         $this->Archive->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Archive->find('first',array('conditions'=>array('Archive.id'=>$id)));
             if($this->Archive->saveField("Aceito","S")){
                 $this->Session->setFlash(__('O arquivo do projeto foi aprovado!'),'flash/success');
@@ -31,7 +31,7 @@ class ArchivesController extends AppController
 
     public function desaprovar($id = null,$idProjeto = null, $idUsuario = null){
         $this->Archive->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->Archive->find('first',array('conditions'=>array('Archive.id'=>$id)));
             if($this->Archive->saveField("Aceito","N")){
                 $this->Session->setFlash(__('O arquivo do projeto foi reprovado!'),'flash/success');
@@ -59,7 +59,7 @@ class ArchivesController extends AppController
         $this->set('qtd', $qntFoto);
 
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Archive->recursive = 2;
             $eventos = $this->Archive->find('all', array(
                 'conditions' => array('Project.course_id' => $this->Session->read('Auth.User.course_id'))

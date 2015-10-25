@@ -29,10 +29,10 @@ class User extends AppModel
                 'message' => 'A senha é obrigatória'
             )
         ),
-        'Matricula' => array(
+        'Telefone' => array(
             'required' => array(
-                'rule' => array('lengthBetween', 7, 9),
-                'message' => 'A matrícula deve possuir 8 caracteres'
+                'rule' => array('notEmpty'),
+                'message' => 'O telefone deve ser informado.'
             )
         ),
         'Email' => array(

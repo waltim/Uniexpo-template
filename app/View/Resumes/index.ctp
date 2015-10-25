@@ -20,7 +20,7 @@
                             <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
                                 <h2>Currículos</h2>
                             <?php endif; ?>
-                            <?php if ($this->Session->read('Auth.User.user_type_id') == 2) : ?>
+                            <?php if ($this->Session->read('Auth.User.user_type_id') == 2 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                 <h2>Meu currículo</h2>
                             <?php endif; ?>
                         </h3>
@@ -29,7 +29,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                     <th>Aluno</th>
                                 <?php endif; ?>
                                 <th>Arquivo</th>
@@ -41,7 +41,7 @@
                             <?php
                             foreach ($novidadeImages as $novidadeImage): ?>
                                 <tr>
-                                    <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                                    <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                         <td>
                                             <?php echo $novidadeImage['User']['username'] ?>
                                         </td>
@@ -65,7 +65,7 @@
 
                                     <td class="actions">
 
-                                        <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                                        <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                             <?php
                                             if ($novidadeImage['Resume']['Aceito'] == 'N'):
                                                 echo $this->Html->link(__('Aprovar currículo'), array('action' => 'aprovar', $novidadeImage['Resume']['id']), array('class' => 'btn btn-default btn-xs'));
@@ -83,7 +83,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                                     <th>Aluno</th>
                                 <?php endif; ?>
                                 <th>Arquivo</th>

@@ -10,7 +10,7 @@ public $uses = array('User','UserImage','ProjectImage');
 
     public function aprovar($id = null, $idProjeto = null, $idUsuario = null){
         $this->ProjectImage->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->ProjectImage->find('first',array('conditions'=>array('ProjectImage.id'=>$id)));
             if($this->ProjectImage->saveField("Aceito","S")){
                 $this->Session->setFlash(__('A imagem do projeto foi aprovada!'), 'flash/success');
@@ -25,7 +25,7 @@ public $uses = array('User','UserImage','ProjectImage');
 
     public function desaprovar($id = null,$idProjeto = null, $idUsuario = null){
         $this->ProjectImage->id = $id;
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) {
             $usuario = $this->ProjectImage->find('first',array('conditions'=>array('ProjectImage.id'=>$id)));
             if($this->ProjectImage->saveField("Aceito","N")){
                 $this->Session->setFlash(__('A imagem do projeto foi reprovada!'), 'flash/success');

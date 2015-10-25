@@ -74,6 +74,16 @@
     <?php echo $this->Element('navigation'); ?>
 <?php endif; ?>
 
+<?php if ($this->params['controller'] === 'Baners' && $this->params['action'] === 'add' || $this->params['controller'] === 'Baners' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Baners' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Tutorials' && $this->params['action'] === 'add' || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('navigation'); ?>
+<?php endif; ?>
+
 <?php if ($this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'add' || $this->params['controller'] === 'ProjectImages' && $this->params['action'] === 'edit'): ?>
     <?php echo $this->Element('navigation'); ?>
 <?php endif; ?>
@@ -171,5 +181,15 @@
 
 <?php if ($this->params['controller'] === 'Themes' && $this->params['action'] === 'add' || $this->params['controller'] === 'Themes' && $this->params['action'] === 'index'
     || $this->params['controller'] === 'Themes' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Baners' && $this->params['action'] === 'add' || $this->params['controller'] === 'Baners' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Baners' && $this->params['action'] === 'edit'): ?>
+    <?php echo $this->Element('footer'); ?>
+<?php endif; ?>
+
+<?php if ($this->params['controller'] === 'Tutorials' && $this->params['action'] === 'add' || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'index'
+    || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'edit'): ?>
     <?php echo $this->Element('footer'); ?>
 <?php endif; ?>

@@ -17,6 +17,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="<?= $admLocal ?>dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
 
+    <link href="<?=$admLocal?>plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+
     <?php if ($this->params['controller'] === 'Users' && $this->params['action'] === 'index'): ?>
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
@@ -39,6 +41,16 @@
 
     <?php if ($this->params['controller'] === 'Skills' && $this->params['action'] === 'index' || $this->params['controller'] === 'Skills' && $this->params['action'] === 'add'
         || $this->params['controller'] === 'Skills' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Baners' && $this->params['action'] === 'index' || $this->params['controller'] === 'Baners' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Baners' && $this->params['action'] === 'edit'): ?>
+        <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <?php endif; ?>
+
+    <?php if ($this->params['controller'] === 'Tutorials' && $this->params['action'] === 'index' || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'add'
+        || $this->params['controller'] === 'Tutorials' && $this->params['action'] === 'edit'): ?>
         <link href="<?= $admLocal ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <?php endif; ?>
 
@@ -166,30 +178,32 @@
                         <i class="fa fa-dashboard"></i> <span>Perfil</span> </i>
                     </a>
                 </li>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 3 || $this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 3) : ?>
                 <li class="treeview">
                     <a>
                         <i class="fa fa-files-o"></i>
                         <span>Administrações gerais</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?= $admLocal ?>Usertypes""><i class="fa fa-circle-o"></i> Tipos de usuários</a></li>
+<!--                        <li><a href="--><?//= $admLocal ?><!--Usertypes""><i class="fa fa-circle-o"></i> Tipos de usuários</a></li>-->
                         <li><a href="<?= $admLocal ?>Semesters""><i class="fa fa-circle-o"></i> Semestres</a></li>
                         <li><a href="<?= $admLocal ?>Courses""><i class="fa fa-circle-o"></i> Cursos</a></li>
                         <li><a href="<?= $admLocal ?>Shifts""><i class="fa fa-circle-o"></i>Períodos</a></li>
                         <li><a href="<?= $admLocal ?>SocialTypes"><i class="fa fa-circle-o"></i>Tipos de sociais</a></li>
                         <li><a href="<?= $admLocal ?>Themes"><i class="fa fa-circle-o"></i>Temas para projetos</a></li>
+                        <li><a href="<?= $admLocal ?>Baners"><i class="fa fa-circle-o"></i>Baners do site</a></li>
+                        <li><a href="<?= $admLocal ?>Tutorials"><i class="fa fa-circle-o"></i>Tutoriais do site</a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                 <li>
                     <a href="<?= $admLocal ?>Archives">
                         <i class="fa fa-th"></i> <span>Arquivos de projetos</span>
                     </a>
                 </li>
                 <?php endif; ?>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 2) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 2 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
                 <li class="treeview">
                     <a href="<?= $admLocal ?>Projects">
                         <i class="fa fa-laptop"></i>
@@ -197,7 +211,7 @@
                     </a>
                 </li>
                 <?php endif; ?>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3 ) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
                 <li class="treeview">
                     <a href="<?= $admLocal ?>Skills">
                         <i class="fa fa-table"></i>
@@ -205,7 +219,7 @@
                     </a>
                 </li>
                 <?php endif; ?>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 1 || $this->Session->read('Auth.User.user_type_id') == 3) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 1) : ?>
                 <li class="treeview">
                     <a href="<?= $admLocal ?>SkillUsers">
                         <i class="fa fa-table"></i>
@@ -220,7 +234,7 @@
                     </a>
                 </li>
                 <?php endif; ?>
-                <?php if ($this->Session->read('Auth.User.user_type_id') == 2 ) : ?>
+                <?php if ($this->Session->read('Auth.User.user_type_id') == 2) : ?>
                 <li class="treeview">
                     <a href="<?= $admLocal?>Resumes">
                         <i class="fa fa-book"></i> <span>Curriculo</span>

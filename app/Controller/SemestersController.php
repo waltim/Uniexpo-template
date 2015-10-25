@@ -45,7 +45,7 @@ class SemestersController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Semester->recursive = 0;
             $this->set('tipos', $this->paginate());
         }
@@ -67,7 +67,7 @@ class SemestersController extends AppController{
         ));
         $this->set('qtd', $qntFoto);
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($this->data){
                 if($this->Semester->save($this->data))
                     $this->Session->setFlash(__('O semestre foi salvo com sucesso!', 'flash/success'));
@@ -97,7 +97,7 @@ class SemestersController extends AppController{
         $this->set('qtd', $qntFoto);
 
 
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             $this->Semester->id = $id;
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->Semester->save($this->request->data)) {
@@ -120,7 +120,7 @@ class SemestersController extends AppController{
     }
     public function delete($id = null)
     {
-        if ($this->Session->read('Auth.User.user_type_id') == 1) {
+        if ($this->Session->read('Auth.User.user_type_id') == 3) {
             if($id){
                 if($this->Semester->delete($id))
                     $this->Session->setFlash(__('Deletado com sucesso!'), 'flash/success');
